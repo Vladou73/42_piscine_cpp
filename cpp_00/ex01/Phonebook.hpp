@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:25:10 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/12/20 15:44:57 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:49:35 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 class Phonebook {
 
 public:
-	Contact contact_list[8];
-
 	Phonebook(void); //constructor
 	~Phonebook(void); //destructor
 
@@ -27,7 +25,9 @@ public:
 	void	search_contact(void) const;
 
 private:
-	int	_idx;
+	int		_idx;
+	int		_nb_contacts;
+	Contact _contact_list[8];
 };
 
 #endif

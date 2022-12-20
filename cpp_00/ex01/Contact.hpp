@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:25:10 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/12/20 15:44:00 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:59:07 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 class Contact {
 
 public:
-	Contact(void);
-	~Contact(void);
+	Contact(void); //constructor
+	~Contact(void); //destructor
 
 	//getters
 	std::string	first_name(void) const;
