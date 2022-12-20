@@ -3,11 +3,11 @@
 using namespace std;
 
 Contact::Contact(void) {
-	std::cout << "appel du constructeur Contact" << std::endl;
+	// std::cout << "appel du constructeur Contact" << std::endl;
 	return;
 }
 Contact::~Contact(void) {
-	std::cout << "appel du destructeur Contact" << std::endl;
+	// std::cout << "appel du destructeur Contact" << std::endl;
 	return;
 }
 
@@ -26,6 +26,10 @@ string	Contact::nickname(void) const {
 
 string	Contact::phone_number(void) const {
 	return _phone_number;
+}
+
+string	Contact::darkest_secret(void) const {
+	return _darkest_secret;
 }
 
 //********** SETTERS **********//

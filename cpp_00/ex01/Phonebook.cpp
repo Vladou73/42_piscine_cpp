@@ -6,22 +6,23 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:31:38 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/12/19 18:33:49 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:46:08 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
+#include <iomanip>
 #include "Phonebook.hpp"
 
 Phonebook::Phonebook(void) {
-	std::cout << "appel du constructeur phonebook" << std::endl;
+	// std::cout << "appel du constructeur phonebook" << std::endl;
 	_idx = 0;
 	return;
 }
 
 Phonebook::~Phonebook(void) {
-	std::cout << "appel du destructeur phonebook" << std::endl;
+	// std::cout << "appel du destructeur phonebook" << std::endl;
 	return;
 }
 
@@ -30,7 +31,6 @@ std::string	get_user_input(void) {
 
 	do {
 		std::getline(std::cin, input);
-		// std::cin.clear();
 	} while (input.empty());
 	return input;
 }
@@ -57,14 +57,43 @@ void	Phonebook::add_contact(void) {
 	contact.darkest_secret(get_user_input());
 
 	this->contact_list[_idx] = contact;
+	_idx++;
 }
 
-// //********** GETTERS **********//
-// std::string	Phonebook::idx(void) const {
-// 	return _idx;
-// }
 
-// //********** SETTERS **********//
-// void	Phonebook::idx(std::string first_name) {
-// 	_first_name.assign(first_name);
-// }
+void	print_formatted_str(std::string str) {
+	if (str.length() < 9)
+		std::cout << "|" << std::setw(10) << str;
+	else
+		std::cout << "|" << str.substr(0, 9) + ".";
+}
+
+void	Phonebook::search_contact(void) const {
+	int	index;
+
+	for (int i = 0; i < 8; i++) {
+		std::cout << std::setw(10) << i + 1;;
+		print_formatted_str(this->contact_list[i].first_name());
+		print_formatted_str(this->contact_list[i].last_name());
+		print_formatted_str(this->contact_list[i].nickname());
+		std::cout << "|" << std::endl;
+	}
+
+	std::cout << "Please enter the index of the contact you want to see." << std::endl;
+	std::cin.clear();
+	std::cin >> index;
+	if (std::cin.fail() || index < 1 || index > 8) {
+		std::cout << "please enter an existing index" << std::endl;
+		std::cin.clear();
+		std::cin.ignore(10000,'\n');
+		return;
+	}
+	std::cin.clear();
+	std::cin.ignore(10000,'\n');
+
+	std::cout << contact_list[index - 1].first_name() << std::endl;
+	std::cout << contact_list[index - 1].last_name() << std::endl;
+	std::cout << contact_list[index - 1].nickname() << std::endl;
+	std::cout << contact_list[index - 1].phone_number() << std::endl;
+	std::cout << contact_list[index - 1].darkest_secret() << std::endl;
+}

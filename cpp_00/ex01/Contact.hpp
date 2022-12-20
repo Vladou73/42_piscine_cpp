@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:25:10 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/12/19 16:14:16 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:44:00 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ public:
 	std::string	last_name(void) const;
 	std::string	nickname(void) const;
 	std::string	phone_number(void) const;
+	std::string	darkest_secret(void) const;
 
 	//setters
 	void		first_name(std::string);
