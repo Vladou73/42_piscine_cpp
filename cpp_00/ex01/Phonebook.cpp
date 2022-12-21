@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:31:38 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/12/21 14:26:12 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:45:05 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	Phonebook::search_contact(void) const {
 	std::cout << "Please enter the index of the contact you want to see." << std::endl;
 	std::cin.clear();
 	std::cin >> index;
-	if (std::cin.fail() index < 1 || index > _nb_contacts) {
+	if (std::cin.fail() || index < 1 || index > _nb_contacts) {
 		std::cout << "please enter an existing index" << std::endl;
 		std::cin.clear();
 		std::cin.ignore(10000,'\n');
