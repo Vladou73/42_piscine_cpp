@@ -6,17 +6,17 @@
 #    By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 14:31:42 by vnafissi          #+#    #+#              #
-#    Updated: 2022/12/17 14:31:43 by vnafissi         ###   ########.fr        #
+#    Updated: 2022/12/21 14:10:30 by vnafissi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =	phonebook
 
-SRCS = phonebook.cpp
+SRCS = Phonebook.cpp Contact.cpp main.cpp
 
 CC = c++
 
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98
+CPPFLAGS = -Wall -Wextra -Werror #-std=c++98
 
 OBJS =	${SRCS:.cpp=.o}
 

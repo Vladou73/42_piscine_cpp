@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:31:53 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/12/17 14:31:54 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:32:17 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	write_str_to_uppercase(char *s) {
 	if (!s)
 		return;
 	while (s[i]) {
-		std::cout << ft_to_uppercase(s[i]);
+		std::cout << (char)std::toupper(s[i]);
 		i++;
 	}
 }

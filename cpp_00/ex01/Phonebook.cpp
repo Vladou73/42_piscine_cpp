@@ -6,7 +6,7 @@
 /*   By: vnafissi <vnafissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:31:38 by vnafissi          #+#    #+#             */
-/*   Updated: 2022/12/20 17:39:54 by vnafissi         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:26:12 by vnafissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ Phonebook::~Phonebook(void) {
 	return;
 }
 
-void ft_find_replace(std::string input, std::string old_str, std::string new_str)
+std::string	ft_find_replace(std::string input, std::string old_str, std::string new_str)
 {
 	size_t pos = input.find(old_str); // Get first occurrence
 	while (pos != std::string::npos) // Repeat till end is reached
@@ -35,15 +35,17 @@ void ft_find_replace(std::string input, std::string old_str, std::string new_str
 		input.replace(pos, old_str.size(), new_str); // replace with new string
 		pos = input.find(old_str, pos + new_str.size()); // Get next occurrence
 	}
+	return input;
 }
 
 std::string	get_user_input(void) {
 	std::string		input;
 	do {
 		std::getline(std::cin, input);
+		if (std::cin.fail())
+			std::exit(1);
 	} while (input.empty());
-	ft_find_replace(input, "\t", " ");
-	return input;
+	return ft_find_replace(input, "\t", " ");
 }
 
 void	Phonebook::add_contact(void) {
@@ -100,7 +102,7 @@ void	Phonebook::search_contact(void) const {
 	std::cout << "Please enter the index of the contact you want to see." << std::endl;
 	std::cin.clear();
 	std::cin >> index;
-	if (std::cin.fail() || index < 1 || index > _nb_contacts) {
+	if (std::cin.fail() index < 1 || index > _nb_contacts) {
 		std::cout << "please enter an existing index" << std::endl;
 		std::cin.clear();
 		std::cin.ignore(10000,'\n');
