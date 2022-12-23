@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Contact.hpp"
-using namespace std;
 
 Contact::Contact(void) {
 	// std::cout << "appel du constructeur Contact" << std::endl;
