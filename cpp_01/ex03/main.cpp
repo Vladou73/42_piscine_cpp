@@ -1,3 +1,4 @@
+//https://openclassrooms.com/fr/courses/7137751-programmez-en-oriente-objet-avec-c/7531356-associez-les-classes-et-les-pointeurs
 #include <iostream>
 #include "HumanA.hpp"
 #include "HumanB.hpp"
