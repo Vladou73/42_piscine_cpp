@@ -32,3 +32,5 @@ int Fixed::getRawBits(void) const { //retourne la valeur du nombre à virgule fi
 void Fixed::setRawBits(int const raw) { //initialise la valeur du nombre à virgule fixe avec celle passée en paramètre
     _val = raw;
 }
+
+const int Fixed::_bits = 8;
