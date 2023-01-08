@@ -1,12 +1,10 @@
-//https://openclassrooms.com/fr/courses/7137751-programmez-en-oriente-objet-avec-c/7531791-decouvrez-la-notion-de-polymorphisme
-//https://en.cppreference.com/w/cpp/language/virtual
-
 #ifndef ANIMAL_HPP
 #define ANIMAL_HPP
 
 #include <iostream>
 #include <string>
 
+//classe abstraite
 class Animal {
     public:
         //constructors, destructors
@@ -17,7 +15,7 @@ class Animal {
         virtual ~Animal(void);                      //destructeur
 
         //member functions
-        virtual void makeSound(void) const;
+        virtual void makeSound(void) const  = 0 ; //méthode virtuelle pure ==> la classe devient une classe abstraite, impossible de l'instancier
         std::string  getType() const;
 
     protected:

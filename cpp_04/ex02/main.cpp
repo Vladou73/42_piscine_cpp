@@ -1,11 +1,40 @@
-//https://openclassrooms.com/fr/courses/7137751-programmez-en-oriente-objet-avec-c/7531356-associez-les-classes-et-les-pointeurs
-//https://openclassrooms.com/fr/courses/7137751-programmez-en-oriente-objet-avec-c/7710051-mettez-en-oeuvre-le-polymorphisme
-//https://stackoverflow.com/questions/184710/what-is-the-difference-between-a-deep-copy-and-a-shallow-copy
+//https://en.cppreference.com/w/cpp/language/abstract_class
+//https://openclassrooms.com/fr/courses/7137751-programmez-en-oriente-objet-avec-c/7710051-mettez-en-oeuvre-le-polymorphisme#/id/r-7710131
 
 #include "Animal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
 #include "Brain.hpp"
+
+// int main(void) {
+//     {
+//         std::cout   << "***** creating instances of classes which are derived from the abstract class Animal *****"
+//                     << std::endl << std::endl;
+
+//         // const Animal*   meta = new Animal();
+//         const Animal*   j = new Dog();
+//         const Animal*   i = new Cat();
+
+//         // std::cout << "animal type is : " << meta->getType() << std::endl; //animal type
+//         std::cout << "animal type is : " << j->getType() << std::endl; //dog type
+//         std::cout << "animal type is : " << i->getType() << std::endl; //cat type
+
+//         std::cout << std::endl;
+
+//         // meta->makeSound(); //animal sound
+//         j->makeSound(); //dog sound
+//         i->makeSound(); //cat sound
+
+//         std::cout << std::endl;
+
+//         // delete meta;
+//         delete j;
+//         delete i;
+//         // meta = 0;
+//         j = 0;
+//         i = 0;
+//     }
+// }
 
 int main(void) {
     {
@@ -21,7 +50,7 @@ int main(void) {
             else
                 animalHorde[i] = new Cat();
         }
-    
+
         //******* animals make sound *******
         for (int i = 0; i < 10; i++) {
             animalHorde[i]->makeSound();
