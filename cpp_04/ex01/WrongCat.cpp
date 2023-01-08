@@ -2,7 +2,7 @@
 
 // **************** CANONICAL CLASS FUNCTIONS **************** //
 
-WrongCat::WrongCat(void): _type("WrongCat") {
+WrongCat::WrongCat(void) : WrongAnimal("WrongCat") {
     std::cout << "WrongCat constructor called" << std::endl << std::endl;
     return;
 }
@@ -21,14 +21,11 @@ WrongCat& WrongCat::operator=(WrongCat const & toCopy) {
     if (this == &toCopy)
         return *this;
     this->_type = toCopy._type;
-    return *this;    
+    return *this;
 }
 
 // **************** MEMBER FUNCTIONS **************** //
 void    WrongCat::makeSound(void) const {
     std::cout << "MIAOUUUUU" << std::endl;
     return;
-}
-std::string    WrongCat::getType(void) const {
-    return this->_type;
 }

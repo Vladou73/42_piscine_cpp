@@ -8,9 +8,10 @@ class WrongAnimal {
     public:
         //constructors, destructors
         WrongAnimal(void);                       //constructeur par défaut
+        WrongAnimal(std::string);                       //constructeur avec type
         WrongAnimal(WrongAnimal const &);             //constructeur de recopie
         WrongAnimal& operator=(WrongAnimal const &);  //surcharge de l’opérateur d’affectation
-        ~WrongAnimal(void);                      //destructeur
+        virtual ~WrongAnimal(void);                      //destructeur
 
         //member functions
         void makeSound(void) const;

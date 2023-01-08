@@ -6,6 +6,10 @@ Animal::Animal(void): _type("Unknown") {
     std::cout << "Animal constructor called" << std::endl;
     return;
 }
+Animal::Animal(std::string type): _type(type) {
+    std::cout << "Animal constructor called" << std::endl;
+    return;
+}
 Animal::~Animal(void) {
     std::cout << "Animal destructor called " << std::endl << std::endl;
     return;
@@ -21,7 +25,7 @@ Animal& Animal::operator=(Animal const & toCopy) {
     if (this == &toCopy)
         return *this;
     this->_type = toCopy._type;
-    return *this;    
+    return *this;
 }
 
 // **************** MEMBER FUNCTIONS **************** //

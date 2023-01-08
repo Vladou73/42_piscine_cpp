@@ -2,33 +2,30 @@
 
 // **************** CANONICAL CLASS FUNCTIONS **************** //
 
-Dog::Dog(void): _type("Dog"), _brainPtr(0) {
-    std::cout << "Dog constructor called" << std::endl << std::endl;
+Dog::Dog(void): Animal("Dog") {
+    std::cout << "Dog constructor called" << std::endl;
     _brainPtr = new Brain();
-    _brainPtr->setIdea(0, "I am a dog");
-    return;
 }
 Dog::~Dog(void) {
     std::cout << "Dog destructor called " << std::endl;
     delete _brainPtr;
     _brainPtr = 0;
-    return;
 }
 
-Dog::Dog(Dog const & toCopy): Animal(toCopy) {
+Dog::Dog(Dog const & toCopy): Animal(toCopy), _brainPtr(0) {
     std::cout << "Dog copy constructor called" << std::endl;
+    _type = toCopy._type;
     _brainPtr = new Brain(*(toCopy._brainPtr));
-    *this = toCopy;
-    return;
 }
 
 Dog& Dog::operator=(Dog const & toCopy) {
     if (this == &toCopy)
         return *this;
-    this->_type = toCopy._type;
+    _type = toCopy._type;
     delete _brainPtr;
+    _brainPtr = 0;
     _brainPtr = new Brain(*(toCopy._brainPtr));
-    return *this;    
+    return *this;
 }
 
 // **************** MEMBER FUNCTIONS **************** //
@@ -36,6 +33,9 @@ void    Dog::makeSound(void) const {
     std::cout << "BARK BARK BARK" << std::endl;
     return;
 }
-std::string    Dog::getType(void) const {
-    return this->_type;
+std::string  Dog::getIdea(int number) const {
+    return _brainPtr->getIdea(number);
+}
+void    Dog::setIdea(int number, std::string idea) {
+    _brainPtr->setIdea(number, idea);
 }

@@ -15,10 +15,6 @@ class WrongCat : public WrongAnimal {
 
         //member functions
         void makeSound(void) const;
-        std::string    getType(void) const;
-
-    protected:
-        std::string _type;
 };
 
 #endif

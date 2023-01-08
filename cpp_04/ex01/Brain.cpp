@@ -1,7 +1,7 @@
 #include "Brain.hpp"
 
 Brain::Brain(void) {
-    std::cout << "Brain constructor called" << std::endl;
+    std::cout << "Brain constructor called" << std::endl  << std::endl;
     for (int i = 0; i < 100; i++) {
         if (i % 2)
             this->_ideas[i] = "my_idea_is_beautiful";
@@ -11,17 +11,20 @@ Brain::Brain(void) {
     return;
 }
 
-Brain::Brain(Brain const& toCopy) {
+Brain::Brain(Brain const &toCopy) {
     std::cout << "Brain copy constructor called" << std::endl;
-    *this = toCopy;
+    // *this = toCopy;
+    for (int i=0; i < 100; i++) {
+        this->_ideas[i] = toCopy._ideas[i];
+    }
     return;
 }
 
-Brain Brain::operator=(Brain const& toCopy) {
+Brain Brain::operator=(Brain const &toCopy) {
     if (this == &toCopy)
-        return *this;
+        return (*this);
     for (int i=0; i < 100; i++) {
-        this->_ideas[i] = toCopy._ideas[i]; 
+        _ideas[i] = toCopy._ideas[i];
     }
     return (*this);
 }
