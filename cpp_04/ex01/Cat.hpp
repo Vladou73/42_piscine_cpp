@@ -1,5 +1,4 @@
-//https://openclassrooms.com/fr/courses/7137751-programmez-en-oriente-objet-avec-c/7531791-decouvrez-la-notion-de-polymorphisme
-//https://en.cppreference.com/w/cpp/language/virtual
+//https://openclassrooms.com/fr/courses/7137751-programmez-en-oriente-objet-avec-c/7531356-associez-les-classes-et-les-pointeurs
 
 #ifndef CAT_HPP
 #define CAT_HPP
@@ -7,6 +6,7 @@
 #include <iostream>
 #include <string>
 #include "Animal.hpp"
+#include "Brain.hpp"
 
 class Cat : public Animal {
     public:
@@ -18,6 +18,11 @@ class Cat : public Animal {
 
         //member functions
         void makeSound(void) const;
+        std::string    getType(void) const;
+
+    protected:
+        std::string _type;
+        Brain*      _brainPtr;
 };
 
 #endif
