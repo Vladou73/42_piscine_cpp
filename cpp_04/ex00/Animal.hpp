@@ -11,6 +11,7 @@ class Animal {
     public:
         //constructors, destructors
         Animal(void);                       //constructeur par défaut
+        Animal(std::string);                   //constructeur avec un type
         Animal(Animal const &);             //constructeur de recopie
         Animal& operator=(Animal const &);  //surcharge de l’opérateur d’affectation
         virtual ~Animal(void);                      //destructeur

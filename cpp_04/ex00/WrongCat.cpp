@@ -2,8 +2,7 @@
 
 // **************** CANONICAL CLASS FUNCTIONS **************** //
 
-WrongCat::WrongCat(void) : WrongAnimal() {
-    this->_type = "WrongCat";
+WrongCat::WrongCat(void) : WrongAnimal("WrongCat") {
     std::cout << "WrongCat constructor called" << std::endl << std::endl;
     return;
 }

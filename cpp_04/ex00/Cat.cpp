@@ -2,9 +2,8 @@
 
 // **************** CANONICAL CLASS FUNCTIONS **************** //
 
-Cat::Cat(void): Animal() {
+Cat::Cat(void): Animal("Cat") {
     std::cout << "Cat constructor called" << std::endl << std::endl;
-    this->_type = "Cat";
     return;
 }
 Cat::~Cat(void) {
@@ -22,7 +21,7 @@ Cat& Cat::operator=(Cat const & toCopy) {
     if (this == &toCopy)
         return *this;
     this->_type = toCopy._type;
-    return *this;    
+    return *this;
 }
 
 // **************** MEMBER FUNCTIONS **************** //
