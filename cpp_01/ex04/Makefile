@@ -12,8 +12,8 @@ RM = rm -rf
 
 all:	${NAME}
 
-.c.o:
-	${CC} ${CPPFLAGS} -c $< -o
+.cpp.o:
+	${CC} ${CPPFLAGS} -c $< -o $@
 
 ${NAME}:	${OBJS}
 			${CC} ${CPPFLAGS} -o ${NAME} ${OBJS}
