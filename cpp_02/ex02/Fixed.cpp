@@ -71,7 +71,7 @@ bool    Fixed::operator<=(Fixed const &b) const {
     return (this->_val <= b._val);
 }
 bool    Fixed::operator>(Fixed const &b) const {
-    return (this->_val >= b._val);
+    return (this->_val > b._val);
 }
 bool    Fixed::operator>=(Fixed const &b) const {
     return (this->_val >= b._val);
