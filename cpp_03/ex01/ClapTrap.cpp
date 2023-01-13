@@ -15,7 +15,7 @@ ClapTrap::ClapTrap(std::string const & name): _name(name), _hit_pts(10), _energy
     return;
 }
 
-ClapTrap::ClapTrap(std::string const &name, int hit_pts, int energy_pts, int attack_dmg): 
+ClapTrap::ClapTrap(std::string const &name, int hit_pts, int energy_pts, int attack_dmg):
     _name(name), _hit_pts(hit_pts), _energy_pts(energy_pts), _attack_dmg(attack_dmg) {
     std::cout << "special ClapTrap constructor called" << std::endl;
     return;
@@ -34,7 +34,7 @@ ClapTrap& ClapTrap::operator=(ClapTrap const & toCopy) {
     this->_energy_pts = toCopy._energy_pts;
     this->_hit_pts = toCopy._hit_pts;
     this->_name = toCopy._name;
-    return *this;    
+    return *this;
 }
 
 // **************** MEMBER FUNCTIONS **************** //
@@ -43,18 +43,22 @@ void ClapTrap::attack(const std::string& target) {
     if (this->_energy_pts < 1) {
         std::cout << "NO ENERGY POINTS LEFT, CANNOT ATTACK" << std::endl;
         return;
-    }    
+    }
     if (this->_hit_pts < 1) {
         std::cout << "NO HIT POINTS LEFT, CANNOT ATTACK" << std::endl;
         return;
     }
     this->_energy_pts--;
+    if (_energy_pts < 0)
+        _energy_pts = 0;
     std::cout   << this->_name << " attacks " << target
                 << " causing " <<  this->_attack_dmg << " points of damage!!!" << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
     this->_hit_pts-= amount;
+    if (_hit_pts < 0)
+        _hit_pts = 0;
     std::cout << this->_name << " was attacked ! Hit points left : " << this->_hit_pts << std::endl;
 }
 
@@ -62,7 +66,7 @@ void ClapTrap::beRepaired(unsigned int amount) {
     if (this->_energy_pts < 1) {
         std::cout << "NO ENERGY POINTS LEFT, CANNOT REPAIR" << std::endl;
         return;
-    }    
+    }
     if (this->_hit_pts < 1) {
         std::cout << "NO HIT POINTS LEFT, CANNOT REPAIR" << std::endl;
         return;
@@ -73,5 +77,7 @@ void ClapTrap::beRepaired(unsigned int amount) {
     }
     this->_energy_pts--;
     this->_hit_pts+= amount;
+    if (_hit_pts > 10)
+        _hit_pts = 10;
     std::cout << this->_name << " auto-repair ! Hit points left : " << this->_hit_pts << std::endl;
 }
