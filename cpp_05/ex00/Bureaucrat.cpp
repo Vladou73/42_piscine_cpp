@@ -1,10 +1,16 @@
 #include "Bureaucrat.hpp"
 
 // *********** CONSTRUCTORS / DESTRUCTOR *********** //
-Bureaucrat::Bureaucrat(void):_name("no name"), _grade(100) {
+Bureaucrat::Bureaucrat(void):_name("unnamed"), _grade(MIN_GRADE) {
 	return;
 }
-Bureaucrat::Bureaucrat(std::string name, unsigned int grade): _name(name), _grade(grade) {
+Bureaucrat::Bureaucrat(std::string name, unsigned int grade): _name(name) {
+	if (grade < MAX_GRADE)
+		throw Bureaucrat::GradeTooHighException();
+	else if (grade > MIN_GRADE)
+		throw Bureaucrat::GradeTooLowException();
+	else
+		_grade = grade;
 	return;
 }
 Bureaucrat::~Bureaucrat(void) {
@@ -19,7 +25,8 @@ Bureaucrat::Bureaucrat(Bureaucrat const &toCopy) {
 Bureaucrat& Bureaucrat::operator=(Bureaucrat const &toCopy) {
 	if (this == &toCopy)
 		return *this;
-	// _name = toCopy._name;
+	std::string *adr_name = (std::string *)&(_name); //comme _name est const, il faut passer par un ptr sur son adresse pour modifier sa valeur
+	*adr_name = toCopy._name;
 	_grade = toCopy._grade;
 	return *this;
 }
@@ -36,10 +43,25 @@ unsigned int	Bureaucrat::getGrade(void) const {
 	return _grade;
 }
 
-void			Bureaucrat::incrementGrade(void) {
-	_grade--;
-	return;
+
+void	Bureaucrat::incrementGrade(void) {
+	if (_grade <= MAX_GRADE)
+		throw Bureaucrat::GradeTooHighException();
+	else
+		_grade--;
 }
-void			Bureaucrat::decrementGrade(void) {
-	_grade++;
+void	Bureaucrat::decrementGrade(void) {
+	if (_grade >= MIN_GRADE)
+		throw Bureaucrat::GradeTooLowException();
+	else
+		_grade++;
+}
+
+// *********** EXCEPTIONS *********** //
+
+const char* Bureaucrat::GradeTooHighException::what() const throw() {
+	return "Bureaucrat::GradeTooHighException\n";
+}
+const char* Bureaucrat::GradeTooLowException::what() const throw() {
+	return "Bureaucrat::GradeTooLowException\n";
 }
