@@ -8,6 +8,7 @@
 
 class Bureaucrat;
 
+//classe abstraite
 class AForm {
 	public:
 		AForm(void);
@@ -24,6 +25,8 @@ class AForm {
 
 		// **** other member functions **** //
 		void			beSigned(Bureaucrat const &);
+		void			execute(Bureaucrat const & executor) const;
+		virtual void	execForm(void) const = 0; //méthode virtuelle pure ==> la classe devient une classe abstraite, impossible de l'instancier
 
 		// **** exception classes **** //
 		class GradeTooHighException : public std::exception {

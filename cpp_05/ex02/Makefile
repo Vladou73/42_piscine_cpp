@@ -1,8 +1,9 @@
-NAME =	ex01
+NAME =	ex02
 
 SRCS =	main.cpp \
 		Bureaucrat.cpp \
-		Form.cpp \
+		AForm.cpp \
+		ShrubberyCreationForm.cpp \
 
 
 CC = c++

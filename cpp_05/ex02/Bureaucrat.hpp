@@ -3,12 +3,12 @@
 
 #include <iostream>
 #include <string>
-#include "Form.hpp"
+#include "AForm.hpp"
 
 # define MIN_GRADE 150
 # define MAX_GRADE 1
 
-class Form;
+class AForm;
 
 class Bureaucrat {
 	public:
@@ -25,7 +25,7 @@ class Bureaucrat {
 		// **** other member functions **** //
 		void			incrementGrade(void);
 		void			decrementGrade(void);
-		void			signForm(Form const &);
+		void			signForm(AForm const &);
 
 		// **** exception classes **** //
 		class GradeTooHighException : public std::exception {

@@ -59,11 +59,16 @@ unsigned int	AForm::getExecGrade(void) const {
 }
 
 // *********** OTHER MEMBER FUNCTIONS *********** //
-void			AForm::beSigned(Bureaucrat const &b) {
+void	AForm::beSigned(Bureaucrat const &b) {
 	if (_sign_grade < b.getGrade())
 		throw AForm::GradeTooHighException();
 	else
 		_signed = true;
+}
+
+void	AForm::execute(Bureaucrat const &executor) const {
+	std::cout << executor;
+	execForm();
 }
 
 // *********** EXCEPTIONS *********** //

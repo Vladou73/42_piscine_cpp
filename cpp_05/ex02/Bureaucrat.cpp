@@ -56,7 +56,7 @@ void	Bureaucrat::decrementGrade(void) {
 	else
 		_grade++;
 }
-void	Bureaucrat::signForm(Form const &f) {
+void	Bureaucrat::signForm(AForm const &f) {
 	if (f.isSigned())
 		std::cout << _name << " signed " << f.getName() << std::endl;
 	else if (_grade <= f.getSignGrade())

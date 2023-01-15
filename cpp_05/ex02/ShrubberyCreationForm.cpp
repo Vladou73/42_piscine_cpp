@@ -1,22 +1,17 @@
 #include "ShrubberyCreationForm.hpp"
 
 // *********** CONSTRUCTORS / DESTRUCTOR *********** //
-ShrubberyCreationForm::ShrubberyCreationForm(void): AForm("random", 145, 137) {
+ShrubberyCreationForm::ShrubberyCreationForm(void): AForm("Shrubbery Form", 145, 137), _target("no_name") {
 	return;
 }
-
-// ShrubberyCreationForm::ShrubberyCreationForm(std::string name, unsigned int sign_grade, unsigned int exec_grade): _name(name), _signed(false), _sign_grade(sign_grade), _exec_grade(exec_grade) {
-// 	if (sign_grade < MAX_GRADE || exec_grade < MAX_GRADE )
-// 		throw ShrubberyCreationForm::GradeTooHighException();
-// 	else if (sign_grade > MIN_GRADE || exec_grade > MIN_GRADE)
-// 		throw ShrubberyCreationForm::GradeTooLowException();
-// 	return;
-// }
-
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target): AForm("Shrubbery Form", 145, 137), _target(target) {
+	return;
+}
 ShrubberyCreationForm::~ShrubberyCreationForm(void) {
 	return;
 }
 ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &toCopy): AForm(toCopy) {
+	*this = toCopy;
 	return;
 }
 
@@ -24,54 +19,42 @@ ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &toCopy
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(ShrubberyCreationForm const &toCopy) {
 	if (this == &toCopy)
 		return *this;
+	AForm::operator=(toCopy);
+	_target = toCopy._target;
 
-	//comme les variables sont const, il faut passer par un ptr sur l'adresse pour modifier sa valeur
-	std::string	*str_ptr = (std::string *)&(_name);
-	*str_ptr = toCopy._name;
-
-	unsigned int *int_ptr = (unsigned int *)&(_sign_grade);
-	*int_ptr = toCopy._sign_grade;
-	int_ptr = (unsigned int *)&(_exec_grade);
-	*int_ptr = toCopy._exec_grade;
-
-	_signed = toCopy._signed;
 	return *this;
 }
+
 std::ostream& operator<<(std::ostream & os, ShrubberyCreationForm const &instance) {
-	os	<< " - ShrubberyCreationForm name : " << instance.getName()
-		<< " - ShrubberyCreationForm signed ? : " << instance.isSigned()
-		<< " - ShrubberyCreationForm sign grade : " << instance.getSignGrade()
-		<< " - ShrubberyCreationForm execution grade : " << instance.getExecGrade() << std::endl;
+	os	<< " - Shrubbery name : " << instance.getName()
+		<< " - Shrubbery signed ? : " << instance.isSigned()
+		<< " - Shrubbery sign grade : " << instance.getSignGrade()
+		<< " - Shrubbery execution grade : " << instance.getExecGrade() << std::endl;
 	return os;
 }
 
-// *********** GETTERS *********** //
-std::string		ShrubberyCreationForm::getName(void) const {
-	return _name;
-}
-bool		 	ShrubberyCreationForm::isSigned(void) const {
-	return _signed;
-}
-unsigned int	ShrubberyCreationForm::getSignGrade(void) const {
-	return _sign_grade;
-}
-unsigned int	ShrubberyCreationForm::getExecGrade(void) const {
-	return _exec_grade;
-}
-
 // *********** OTHER MEMBER FUNCTIONS *********** //
-void			ShrubberyCreationForm::beSigned(Bureaucrat const &b) {
-	if (_sign_grade < b.getGrade())
-		throw ShrubberyCreationForm::GradeTooHighException();
+void ShrubberyCreationForm::execForm() const
+{
+	std::string filename = _target + "_shrubbery";
+	std::ofstream file;
+
+	file.open(filename.c_str());
+	if (file.fail())
+		std::cout << filename <<  "something went wrong with the file file" << std::endl;
 	else
-		_signed = true;
-}
-
-// *********** EXCEPTIONS *********** //
-
-const char* ShrubberyCreationForm::GradeTooHighException::what() const throw() {
-	return "ShrubberyCreationForm::GradeTooHighException\n";
-}
-const char* ShrubberyCreationForm::GradeTooLowException::what() const throw() {
-	return "ShrubberyCreationForm::GradeTooLowException\n";
+	{
+		std::cout << filename << " file created" << std::endl;
+		file <<	"             ,@@@@@@@,            "	<< std::endl;
+       	file << "     ,,,.   ,@@@@@@/@@,  .oo8888o."	<< std::endl;
+   		file << "  ,&%%&%&&%,@@@@@/@@@@@@,888\\88//8o"	<< std::endl;
+   		file << " ,%&\\%&%&&%,@@\\@@@//@@@88\\8888//888'"	<< std::endl;
+  		file << " %&&%&%&/%&&%@@\\@/ //@@@8888\\8888888'"	<< std::endl;
+  		file << " %&&%/ %&%%&&@@\\V /@@' `88\\8 `//88'"	<< std::endl;
+  		file << " `&%\\ ` /%&'    |.|        8\\'|8'"	<< std::endl;
+  		file << "      |o|        | |         | |	"		<< std::endl;
+  		file << "      |.|        | |         | |	"		<< std::endl;
+		file << "  \\/ ._\\//_/__/  ,\\_//__\\/.  \\_//__/_"	<< std::endl;
+		file.close();
+	}
 }

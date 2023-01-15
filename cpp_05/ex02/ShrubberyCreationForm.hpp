@@ -4,42 +4,24 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
 #include "Bureaucrat.hpp"
 
 class Bureaucrat;
 
-class ShrubberyCreationForm : public Form{
+class ShrubberyCreationForm : public AForm {
 	public:
 		ShrubberyCreationForm(void);
-		ShrubberyCreationForm(std::string, unsigned int, unsigned int);
+		ShrubberyCreationForm(std::string);
 		virtual ~ShrubberyCreationForm(void);
 		ShrubberyCreationForm(ShrubberyCreationForm const &);
 		ShrubberyCreationForm& operator=(ShrubberyCreationForm const &);
 
-		// **** getters **** //
-		std::string 	getName(void) const;
-		bool		 	isSigned(void) const;
-		unsigned int	getSignGrade(void) const;
-		unsigned int	getExecGrade(void) const;
-
-		// **** other member functions **** //
-		void			beSigned(Bureaucrat const &);
-
-		// **** exception classes **** //
-		class GradeTooHighException : public std::exception {
-			public:
-				virtual const char* what() const throw();
-		};
-		class GradeTooLowException : public std::exception {
-			public:
-				virtual const char* what() const throw();
-		};
+		void execForm(void) const;
 
 	private:
-		std::string const	_name;
-		bool				_signed;
-		unsigned int const	_sign_grade;
-		unsigned int const	_exec_grade;
+		std::string	_target;
+
 };
 
 std::ostream &operator<<(std::ostream & os, ShrubberyCreationForm const &instance);
