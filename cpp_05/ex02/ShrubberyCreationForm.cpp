@@ -26,16 +26,20 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(ShrubberyCreationForm co
 }
 
 std::ostream& operator<<(std::ostream & os, ShrubberyCreationForm const &instance) {
-	os	<< " - Shrubbery name : " << instance.getName()
-		<< " - Shrubbery signed ? : " << instance.isSigned()
-		<< " - Shrubbery sign grade : " << instance.getSignGrade()
-		<< " - Shrubbery execution grade : " << instance.getExecGrade() << std::endl;
+	os	<< " Form name : " << instance.getName()
+		<< " - Form signed ? : " << instance.isSigned()
+		<< " - Form sign grade : " << instance.getSignGrade()
+		<< " - Form execution grade : " << instance.getExecGrade()
+		<< " - Form target : " << instance.getTarget() << std::endl;
 	return os;
 }
 
 // *********** OTHER MEMBER FUNCTIONS *********** //
-void ShrubberyCreationForm::execForm() const
-{
+std::string ShrubberyCreationForm::getTarget(void) const {
+	return (_target);
+}
+
+void ShrubberyCreationForm::execForm() const {
 	std::string filename = _target + "_shrubbery";
 	std::ofstream file;
 

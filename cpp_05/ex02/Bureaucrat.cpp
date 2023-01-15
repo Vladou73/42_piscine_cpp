@@ -64,6 +64,18 @@ void	Bureaucrat::signForm(AForm const &f) {
 	else
 		std::cout << _name << " couldn't sign " << f.getName() << " because his grade is too low" << std::endl;
 }
+void	Bureaucrat::executeForm(AForm const &form) {
+	if (form.isSigned() == false) {
+		std::cout << _name << " could not execute form " << form.getName() << " because " << std::endl;
+		throw AForm::UnsignedException();
+	} else if (form.getExecGrade() < this->getGrade()) {
+		std::cout << _name << " could not execute form " << form.getName() << " because " << std::endl;
+		throw AForm::GradeTooHighException();
+	} else {
+		form.execForm();
+		std::cout << _name << " executed " << form.getName() << std::endl;
+	}
+}
 
 // *********** EXCEPTIONS *********** //
 

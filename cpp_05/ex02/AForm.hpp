@@ -37,7 +37,11 @@ class AForm {
 			public:
 				virtual const char* what() const throw();
 		};
-
+		class UnsignedException : public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
+		
 	private:
 		std::string const	_name;
 		bool				_signed;

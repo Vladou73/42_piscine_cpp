@@ -67,15 +67,22 @@ void	AForm::beSigned(Bureaucrat const &b) {
 }
 
 void	AForm::execute(Bureaucrat const &executor) const {
-	std::cout << executor;
-	execForm();
+	if (_signed == false)
+		throw AForm::UnsignedException();
+	else if (_exec_grade < executor.getGrade())
+		throw AForm::GradeTooHighException();
+	else
+		execForm();
 }
 
 // *********** EXCEPTIONS *********** //
 
 const char* AForm::GradeTooHighException::what() const throw() {
-	return "AForm::GradeTooHighException\n";
+	return "GradeTooHighException\n";
 }
 const char* AForm::GradeTooLowException::what() const throw() {
-	return "AForm::GradeTooLowException\n";
+	return "GradeTooLowException\n";
+}
+const char* AForm::UnsignedException::what() const throw() {
+	return "UnsignedException\n";
 }
