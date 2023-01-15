@@ -1,10 +1,21 @@
-//https://en.cppreference.com/w/cpp/language/static_cast
-// Static Cast: This is the simplest type of cast which can be used. It is a compile time cast.
-// it can also call explicit conversion functions.
-// Static cast Converts between types using a combination of implicit and user-defined conversions.
+// https://en.cppreference.com/w/cpp/language/reinterpret_cast
+
+// Unlike static_cast, the reinterpret_cast expression does not compile to any CPU instructions
+// (except when converting between integers and pointers).
+//  It is purely a compile-time directive which instructs the compiler to treat expression as if it had the type new-type.
+
+//  A pointer can be converted to any integral type large enough to hold all values of its type (e.g. to std::uintptr_t)
+
+    // // pointer to integer and back
+    // std::uintptr_t v1 = reinterpret_cast<std::uintptr_t>(&i); // static_cast is an error
+    // std::cout << "The value of &i is " << std::showbase << std::hex << v1 << '\n';
+    // int* p1 = reinterpret_cast<int*>(v1);
+    // assert(p1 == &i);
+
 
 #ifndef CONVERT_HPP
 #define CONVERT_HPP
+
 
 #include <string>
 #include <iostream>

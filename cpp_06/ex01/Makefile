@@ -3,6 +3,7 @@ NAME =	ex00
 SRCS =	main.cpp \
 		Convert.cpp \
 
+
 CC = c++
 
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98

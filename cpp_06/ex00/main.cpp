@@ -11,7 +11,6 @@ int main(int argc, char **argv)
         std::cout << "This argument is empty" << std::endl;
         return 1;
 	}
-
 	try {
         Convert convert(str);
     } catch (const std::exception &e) {
