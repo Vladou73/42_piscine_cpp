@@ -17,12 +17,11 @@ int main(void) {
         std::cout << f1;
 
         std::cout  << std::endl << "* Signature *" << std::endl;
-        f1.beSigned(dg);
+        dg.signForm(f1);
         std::cout << f1;
 
         std::cout  << std::endl << "* Execution *" << std::endl;
         subalterne.executeForm(f1);
-        // f1.execute(subalterne);
     } catch (std::exception &e) {
         std::cout << "exception catched : " << e.what();
     }
@@ -37,13 +36,8 @@ int main(void) {
         std::cout << subalterne;
         std::cout << f1;
 
-        // std::cout  << std::endl << "* Signature *" << std::endl;
-        // f1.beSigned(dg);
-        // std::cout << f1;
-
         std::cout  << std::endl << "* Execution *" << std::endl;
         subalterne.executeForm(f1);
-        // f1.execute(subalterne);
 
     } catch (std::exception &e) {
         std::cout << "exception catched : " << e.what();
@@ -60,12 +54,11 @@ int main(void) {
         std::cout << f1;
 
         std::cout  << std::endl << "* Signature *" << std::endl;
-        f1.beSigned(dg);
+        dg.signForm(f1);
         std::cout << f1;
 
         std::cout  << std::endl << "* Execution *" << std::endl;
         subalterne.executeForm(f1);
-        // f1.execute(subalterne);
 
     } catch (std::exception &e) {
         std::cout << "exception catched : " << e.what();
@@ -82,7 +75,7 @@ int main(void) {
         std::cout << f1;
 
         std::cout  << std::endl << "* Signature *" << std::endl;
-        f1.beSigned(dg);
+        dg.signForm(f1);
         std::cout << f1;
 
         std::cout  << std::endl << "* Execution *" << std::endl;
@@ -103,7 +96,7 @@ int main(void) {
         std::cout << f1;
 
         std::cout  << std::endl << "* Signature *" << std::endl;
-        f1.beSigned(dg);
+        dg.signForm(f1);
         std::cout << f1;
 
         std::cout  << std::endl << "* Execution *" << std::endl;
@@ -122,10 +115,6 @@ int main(void) {
         std::cout << dg;
         std::cout << subalterne;
         std::cout << f1;
-
-        // std::cout  << std::endl << "* Signature *" << std::endl;
-        // f1.beSigned(dg);
-        // std::cout << f1;
 
         std::cout  << std::endl << "* Execution *" << std::endl;
         f1.execute(subalterne);

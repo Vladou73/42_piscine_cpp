@@ -24,7 +24,6 @@ int main(void) {
 
         std::cout << b1;
         std::cout << f3;
-        f3.beSigned(b1);
         b1.signForm(f3);
     }
     catch (std::exception &e) {
@@ -36,7 +35,7 @@ int main(void) {
         Form f4("f4", 35, 60);
         std::cout << b2;
         std::cout << f4;
-        f4.beSigned(b2);
+        b2.signForm(f4);
     }
     catch (std::exception &e) {
         std::cout << "exception catched : " << e.what();

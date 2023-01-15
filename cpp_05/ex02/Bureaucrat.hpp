@@ -25,7 +25,7 @@ class Bureaucrat {
 		// **** other member functions **** //
 		void			incrementGrade(void);
 		void			decrementGrade(void);
-		void			signForm(AForm const &);
+		void			signForm(AForm &);
 		void			executeForm(AForm const & form);
 
 		// **** exception classes **** //
