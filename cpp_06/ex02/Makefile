@@ -1,7 +1,7 @@
-NAME =	serialize
+NAME =	real
 
 SRCS =	main.cpp \
-
+		Base.cpp \
 
 CC = c++
 
