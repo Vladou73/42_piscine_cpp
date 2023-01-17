@@ -1,7 +1,14 @@
-//https://en.cppreference.com/w/cpp/language/static_cast
-// Static Cast: This is the simplest type of cast which can be used. It is a compile time cast.
-// it can also call explicit conversion functions.
-// Static cast Converts between types using a combination of implicit and user-defined conversions.
+// The main reason is that classic C casts make no distinction between what we call static_cast<>(), reinterpret_cast<>(), and dynamic_cast<>().
+//These things are completely different.
+
+// A static_cast<>() is usually safe. There is a valid conversion in the language, or an appropriate constructor that makes it possible.
+//The only time it's a bit risky is when you cast down to an inherited class;
+// you must make sure that the object is actually the descendant that you claim it is, by means external to the language (like a flag in the object).
+// A dynamic_cast<>() is safe as long as the result is checked (pointer) or a possible exception is taken into account (reference).
+
+// A reinterpret_cast<>() (or a const_cast<>()) on the other hand is always dangerous.
+// You tell the compiler: "trust me: I know this doesn't look like a foo (this looks as if it isn't mutable), but it is".
+
 
 #ifndef CONVERT_HPP
 #define CONVERT_HPP
