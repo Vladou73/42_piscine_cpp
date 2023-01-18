@@ -1,4 +1,5 @@
 // https://openclassrooms.com/fr/courses/7137751-programmez-en-oriente-objet-avec-c/7533236-creez-des-templates
+// https://stackoverflow.com/questions/8752837/undefined-reference-to-template-class-constructor
 
 #ifndef ARRAY_HPP
 #define ARRAY_HPP

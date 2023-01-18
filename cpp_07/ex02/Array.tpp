@@ -7,9 +7,6 @@ Array<T>::Array(): _array(0), _size(0) {
 template <typename T>
 Array<T>::Array(unsigned int n): _array(0), _size(n) {
 	_array = new T[_size];
-	for (unsigned int i = 0; i < n; i++) {
-		_array[i] = 0;
-	}
 }
 template<typename T>
 Array<T>::~Array(void) {
@@ -20,14 +17,14 @@ Array<T>::~Array(void) {
 }
 
 template<typename T>
-Array<T>::Array(Array const &toCopy): _array(0), _size(toCopy._size) {
+Array<T>::Array(Array<T> const &toCopy): _array(0), _size(toCopy._size) {
 	_array = new T[_size];
 	for (unsigned int i = 0; i < _size; i++) {
 		_array[i] = toCopy._array[i];
 	}
 }
 template<typename T>
-Array<T> &Array<T>::operator=(Array const &toCopy) {
+Array<T> &Array<T>::operator=(Array<T> const &toCopy) {
 	if (this == &toCopy)
 		return *this;
 

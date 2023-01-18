@@ -1,7 +1,6 @@
 NAME =	ex02
 
 SRCS =	main.cpp \
-		Array.cpp \
 
 CC = c++
 
