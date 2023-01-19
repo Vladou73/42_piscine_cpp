@@ -10,17 +10,8 @@
 # include <list>
 
 template<typename T>
-int easyfind(const T &a, const int &nbr) {
-
-	typename T::const_iterator it;
-	int index = 0;
-	for (it = a.begin(); it != a.end(); it++) {
-		// std::cout << *it << std::endl;
-		if (*it == nbr)
-			return index;
-		index++;
-	}
-	return -1;
+typename T::const_iterator easyfind(const T &a, const int &nbr) {
+	return find(a.begin(), a.end(), nbr);
 }
 
 #endif

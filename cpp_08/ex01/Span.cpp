@@ -36,7 +36,7 @@ unsigned int	Span::longestSpan(void) {
 		throw Span::SpanException();
 }
 unsigned int	Span::shortestSpan(void) {
-	int sh;
+	int sh = INT_MAX;
 
 	if (_table.size() > 1) {
 		std::vector<int>::iterator it1;

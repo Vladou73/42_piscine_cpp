@@ -78,10 +78,10 @@ int main()
 	}
 
 	std::cout << std::endl << std::endl<< std::endl << "******** TEST COPY CONSTRUCTOR ********" << std::endl;
-	std::stack<std::string> s(mstack);
-	MutantStack<std::string>::iterator it2 = mstack.begin();
-	MutantStack<std::string>::iterator ite2 = mstack.end();
-	std::cout<< "iterate through container"<< std::endl;
+	MutantStack<std::string> s(mstack);
+	MutantStack<std::string>::iterator it2 = s.begin();
+	MutantStack<std::string>::iterator ite2 = s.end();
+	std::cout<< "iterate through copy container"<< std::endl;
 	while (it2 != ite2)
 	{
 		std::cout << *it2 << std::endl;

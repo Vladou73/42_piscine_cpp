@@ -10,6 +10,7 @@
 # include <algorithm>
 # include <vector>
 #include <cmath>
+#include <limits.h>
 
 class Span {
 	public:
