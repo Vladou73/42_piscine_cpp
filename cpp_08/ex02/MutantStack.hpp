@@ -12,6 +12,7 @@
 #include <exception>
 # include <algorithm>
 # include <stack>
+# include <list>
 #include <cmath>
 
 template<typename T>
@@ -40,7 +41,3 @@ class MutantStack : public std::stack<T> {
 };
 
 #endif
-
-//By default, if no container
-//class is specified for a particular stack class instantiation,
-//the standard container deque is used.
