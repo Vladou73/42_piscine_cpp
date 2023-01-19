@@ -1,56 +1,38 @@
-#include "whatever.hpp"
+#include "easyfind.hpp"
 
-// int main(void) {
-// 	double	a1 = 5.123;
-// 	double 	b1 = 0.1;
+int main(void) {
+	std::vector<int> a1(5, 3);
+	std::list<int> a2;
 
-// 	int		a2 = -50;
-// 	int 	b2 = 18888;
+	a2.push_back(-10);
+	a2.push_back(10);
+	a2.push_back(890);
 
-// 	char	a3 = 'A';
-// 	char	b3 = 'B';
+	int index;
+	int nbr;
 
-// 	std::cout << std::endl << "*************** MIN ***************"<< std::endl;
+	nbr = 3;
+	index = easyfind(a1, nbr);
+	if (index < 0)
+		std::cout << nbr << " : ERROR : not in array a1"<< std::endl;
+	else
+		std::cout << nbr  << " : FIRST OCCURENCE AT INDEX : "<< index << std::endl;
 
-// 	std::cout << "min "<< a1 << " and " << b1 << " is "<< ::min<double>(a1, b1) << std::endl;
-// 	std::cout << "min "<< a2 << " and " << b2 << " is "<< ::min<int>(a2, b2) << std::endl;
-// 	std::cout << "min "<< a3 << " and " << b3 << " is "<< ::min<char>(a3, b3) << std::endl;
+	nbr = 78;
+	index = easyfind(a2, nbr);
+	if (index < 0)
+		std::cout << nbr << " : ERROR : not in array a2"<< std::endl;
+	else
+		std::cout << nbr << " : FIRST OCCURENCE AT INDEX : "<< index << std::endl;
 
-// 	std::cout << std::endl << "*************** MAX ***************"<< std::endl;
+	nbr = 890;
+	index = easyfind(a2, nbr);
+	if (index < 0)
+		std::cout << nbr << " : ERROR : not in array a2"<< std::endl;
+	else
+		std::cout << nbr  << " : FIRST OCCURENCE AT INDEX : "<< index << std::endl;
 
-// 	std::cout << "max "<< a1 << " and " << b1 << " is "<< ::max<double>(a1, b1) << std::endl;
-// 	std::cout << "max "<< a2 << " and " << b2 << " is "<< ::max<int>(a2, b2) << std::endl;
-// 	std::cout << "max "<< a3 << " and " << b3 << " is "<< ::max<char>(a3, b3) << std::endl;
-
-// 	std::cout << std::endl << "*************** SWAP ***************"<< std::endl;
-
-// 	std::cout << "a1="<< a1 << ", b1=" << b1 << std::endl;
-// 	::swap(a1, b1);
-// 	std::cout << "a1="<< a1 << ", b1=" << b1 << std::endl << std::endl;
-
-// 	std::cout << "a2="<< a2 << ", b2=" << b2 << std::endl;
-// 	::swap(a2, b2);
-// 	std::cout << "a2="<< a2 << ", b2=" << b2 << std::endl << std::endl;
-
-// 	std::cout << "a3="<< a3 << ", b3=" << b3 << std::endl;
-// 	::swap(a3, b3);
-// 	std::cout << "a3="<< a3 << ", b3=" << b3 << std::endl << std::endl;
-
-// 	return 0;
-// }
-
-int main( void ) {
-int a = 2;
-int b = 3;
-::swap( a, b );
-std::cout << "a = " << a << ", b = " << b << std::endl;
-std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
-std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl;
-std::string c = "chaine1";
-std::string d = "chaine2";
-::swap(c, d);
-std::cout << "c = " << c << ", d = " << d << std::endl;
-std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
-std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
-return 0;
+	return 0;
 }
+
+
