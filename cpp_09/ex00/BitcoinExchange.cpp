@@ -36,9 +36,13 @@ int    BitcoinExchange::generateDatabase(void) {
     if (in_file.is_open())
 		in_file.close();
 
-    for (std::map<std::string, float>::iterator it=_db.begin(); it!=_db.end(); ++it)
-        std::cout << it->first << " => " << it->second << std::endl;
+    // for (std::map<std::string, float>::iterator it=_db.begin(); it!=_db.end(); ++it)
+    //     std::cout << it->first << " => " << it->second << std::endl;
 
     return 0;
 
 }
+
+// int    BitcoinExchange::readArgFile(std::string filename) {
+
+// }

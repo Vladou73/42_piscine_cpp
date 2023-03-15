@@ -6,9 +6,67 @@
 
 #include "BitcoinExchange.hpp"
 
-int main(void) {
-	BitcoinExchange test;
-	test.generateDatabase();
+bool	str_has_right_format_number(const std::string &str) {
+	size_t count_dots = 0;
+	for (std::string::const_iterator it = str.begin(); it != str.end(); it++) {
+		if (!std::isdigit(*it)) {
+			if (*it == '.')
+				count_dots++;
+			else
+				return (false);
+		}
+		if (count_dots > 1)
+			return (false);
+	}
+	return (true);
+}
+
+
+int main(int argc, char **argv) {
+	if (argc != 2) {
+		std::cout << "please use 1 argument for the program to work" << std::endl;
+		return 1;
+    }
+
+	BitcoinExchange BE;
+	BE.generateDatabase();
+
+
+    std::string line;
+    std::string filename = argv[1];
+    std::ifstream in_file;
+
+    in_file.open(filename.c_str(), std::ios::in);
+    if (!in_file.is_open()) {
+        std::cout << "please enter a valid existing filename as first argument" << std::endl;
+        return 1;
+    }
+
+	size_t		pos;
+	int			exchangeRate = 0;
+	std::string	bitcoins;		
+	while (std::getline(in_file, line)) {
+		pos = line.find(" | ");
+		if (pos == std::string::npos) {
+			std::cout << "Error: bad input format missing '|' => " << line << std::endl;
+			continue;
+		}
+		bitcoins = line.substr(pos + 3, std::string::npos);
+		if (!str_has_right_format_number(bitcoins)) {
+			std::cout << "Error: bad number given => " << line << std::endl;
+			continue;
+		}
+		// exchangeRate = BE.getExchangeRate(line.substr(0, pos));
+		std::cout	<< line.substr(0, pos)
+					<< " => "
+					<< bitcoins
+					<< " = "
+					<< exchangeRate
+					<< std::endl;
+	}
+
+    if (in_file.is_open())
+		in_file.close();
 	
 	return 0;
 }
