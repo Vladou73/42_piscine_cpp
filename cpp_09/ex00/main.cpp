@@ -81,8 +81,12 @@ int main(int argc, char **argv) {
 	std::string	bitcoins;
 	std::string	str_date;
 	struct tm 	date;
-
+	bool		header = true;
 	while (std::getline(in_file, line)) {
+		if (header == true) {
+			header = false;
+			continue;
+		}
 		memset(&date, 0, sizeof(tm));
 		pos = line.find(" | ");
 		if (pos == std::string::npos) {

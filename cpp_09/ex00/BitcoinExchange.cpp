@@ -1,17 +1,11 @@
 #include "BitcoinExchange.hpp" 
 
-BitcoinExchange::BitcoinExchange(void): _db() {
-    std::cout << "instance créée" << std::endl;
-}
-BitcoinExchange::~BitcoinExchange(void) {
-    std::cout << "destruction" << std::endl;
-}
+BitcoinExchange::BitcoinExchange(void): _db() {}
+BitcoinExchange::~BitcoinExchange(void) {}
 BitcoinExchange::BitcoinExchange(BitcoinExchange const &toCopy) {
 	*this = toCopy;
 }
 BitcoinExchange const &BitcoinExchange::operator=(BitcoinExchange const &toCopy) {
-	std::cout << "instance copied" << std::endl;
-
     if (this == &toCopy)
 		return *this;
 	// Using assignment operator to copy one map to the other
