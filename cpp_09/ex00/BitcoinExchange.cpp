@@ -30,9 +30,9 @@ int    BitcoinExchange::generateDatabase(void) {
         return 1;
     }
 
-    while (std::getline(in_file, line))
-		_db[line.substr(0, line.find(","))] = atoi(line.substr(line.find(",") + 1, std::string::npos).c_str());
-
+    while (std::getline(in_file, line)) {
+        _db[line.substr(0, line.find(","))] = atof(line.substr(line.find(",") + 1, std::string::npos).c_str());
+    }
     if (in_file.is_open())
 		in_file.close();
 
