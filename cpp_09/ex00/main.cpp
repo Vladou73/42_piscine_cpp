@@ -103,11 +103,7 @@ int main(int argc, char **argv) {
 			std::cout << "Error: date format => " << line << std::endl;
 			continue;
 		}
-		std::cout << "date.tm_year:" << date.tm_year << std::endl;
-		std::cout << "date.tm_mon:" << date.tm_mon << std::endl;
-		std::cout << "date.tm_mday:" <<  date.tm_mday << std::endl;
-
-		// exchangeRate = BE.getExchangeRate(line.substr(0, pos));
+		exchangeRate = BE.calcExchangeRate(date, atof(bitcoins.c_str()));
 		std::cout	<< line.substr(0, pos)
 					<< " => "
 					<< bitcoins

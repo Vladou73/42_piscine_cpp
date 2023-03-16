@@ -19,7 +19,8 @@ class BitcoinExchange {
         BitcoinExchange(BitcoinExchange const &);
         BitcoinExchange const &operator=(BitcoinExchange const &);
 
-        int    generateDatabase(void);
+        int     generateDatabase(void);
+        double  calcExchangeRate(struct tm date, double btc);
 
     private:
         std::map<std::string, float>	_db;
