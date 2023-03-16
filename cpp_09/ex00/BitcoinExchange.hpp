@@ -6,6 +6,7 @@
 #include <map>
 #include <cmath>
 #include <ctime>
+#include <cstring>
  
 #include <iostream>
 #include <string>

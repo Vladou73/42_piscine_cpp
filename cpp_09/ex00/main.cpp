@@ -21,6 +21,41 @@ bool	str_has_right_format_number(const std::string &str) {
 	return (true);
 }
 
+bool	date_is_ok(const std::string &str, struct tm *date) {
+	size_t	pos1 = 0;
+	size_t	pos2 = 0;
+	int		year = 0;
+	int		month = 0;
+	int		day = 0;
+
+	pos1 = str.find("-");
+	if (pos1 == std::string::npos) 
+		return (false);
+	pos2 = str.find("-", pos1 + 1);
+	if (pos2 == std::string::npos) 
+		return (false);
+	
+	year = atoi(str.substr(0, pos1).c_str());
+	month = atoi(str.substr(pos1 + 1, pos2).c_str());
+	day = atoi(str.substr(pos2 + 1, std::string::npos).c_str());
+
+	if (
+		year < 2009 || year > 2023
+		|| month < 1 || month > 12
+		|| day < 1 || day > 12
+		|| (month == 2 && (day > 28))
+	)
+		return (false);
+
+	date->tm_year = year - 1900;
+    date->tm_mon = month - 1;
+    date->tm_mday = day;
+	date->tm_sec = 0;
+	date->tm_min = 0;
+	date->tm_hour = 12; 
+	return (true);
+}
+
 
 int main(int argc, char **argv) {
 	if (argc != 2) {
@@ -30,7 +65,6 @@ int main(int argc, char **argv) {
 
 	BitcoinExchange BE;
 	BE.generateDatabase();
-
 
     std::string line;
     std::string filename = argv[1];
@@ -44,18 +78,35 @@ int main(int argc, char **argv) {
 
 	size_t		pos;
 	int			exchangeRate = 0;
-	std::string	bitcoins;		
+	std::string	bitcoins;
+	std::string	str_date;
+	struct tm 	date;
+
 	while (std::getline(in_file, line)) {
+		memset(&date, 0, sizeof(tm));
 		pos = line.find(" | ");
 		if (pos == std::string::npos) {
 			std::cout << "Error: bad input format missing '|' => " << line << std::endl;
 			continue;
 		}
 		bitcoins = line.substr(pos + 3, std::string::npos);
+		str_date = line.substr(0, pos);
 		if (!str_has_right_format_number(bitcoins)) {
-			std::cout << "Error: bad number given => " << line << std::endl;
+			std::cout << "Error: wrong number format => " << line << std::endl;
 			continue;
 		}
+		if (atof(bitcoins.c_str()) < 0 || atof(bitcoins.c_str()) > 1000) {
+			std::cout << "Error: number out of range => " << line << std::endl;
+			continue;
+		}
+		if (!date_is_ok(str_date, &date)) {
+			std::cout << "Error: date format => " << line << std::endl;
+			continue;
+		}
+		std::cout << "date.tm_year:" << date.tm_year << std::endl;
+		std::cout << "date.tm_mon:" << date.tm_mon << std::endl;
+		std::cout << "date.tm_mday:" <<  date.tm_mday << std::endl;
+
 		// exchangeRate = BE.getExchangeRate(line.substr(0, pos));
 		std::cout	<< line.substr(0, pos)
 					<< " => "
@@ -70,30 +121,3 @@ int main(int argc, char **argv) {
 	
 	return 0;
 }
-
-
-// int main(void) {
-// 	struct tm tm1;
-// 	struct tm tm2;
-	
-// 	time_t	time1;
-// 	time_t	time2;
-
-// 	const char *date1 = "2010-01-25";
-// 	const char *date2 = "2005-12-25";
-
-// 	strptime(date1, "%Y-%m-%d", &tm1);
-// 	strptime(date2, "%Y-%m-%d", &tm2);
-	
-// 	time1 = mktime(&tm1);
-// 	time2 = mktime(&tm2);
-
-// 	std::cout << tm1.tm_year << std::endl;
-// 	std::cout << tm1.tm_mon << std::endl;
-// 	std::cout << tm1.tm_mday << std::endl;
-// 	std::cout << (time1 > time2) << std::endl;
-
-// 	return 0;
-// }
-
-
