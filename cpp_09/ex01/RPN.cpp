@@ -29,9 +29,36 @@ int    RPN::checkInputFormat(void) {
             count_op++;
         else
             return 1;
-        std::cout << str << std::endl;
     }
     if (count_nb < 1 || count_nb != count_op + 1)
         return 1; 
     return 0;
+}
+
+int RPN::calcRpn(void) {
+    std::istringstream  istream(_rpn);
+    int                 tmp = 0;
+    std::string         str;
+
+    while (getline(istream, str, ' ')) {
+        if (std::isdigit(str[0]))
+            _stack.push(atoi(str.c_str()));
+        else {
+            tmp = _stack.top();
+            _stack.pop();
+            if (str == "+")
+                tmp += _stack.top();
+            else if (str == "-")
+                tmp -= _stack.top();
+            else if (str == "*")
+                tmp *= _stack.top();
+            else 
+                tmp /= _stack.top();
+            _stack.pop();
+            _stack.push(tmp);
+        }
+        std::cout << _stack.top() << std::endl;
+    }
+    std::cout << _stack.top() << std::endl;
+    return (0);
 }

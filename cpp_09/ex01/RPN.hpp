@@ -23,7 +23,8 @@ class RPN {
         RPN(RPN const &);
         RPN const &operator=(RPN const &);
 
-        int    checkInputFormat(void);
+        int checkInputFormat(void);
+        int calcRpn(void);
 
     private:
         std::string     _rpn;
