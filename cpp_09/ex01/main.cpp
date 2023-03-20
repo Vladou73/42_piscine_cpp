@@ -16,7 +16,10 @@ int main(int argc, char **argv) {
 		return 1;
 	}
 
-	rpn.calcRpn();
+	if (rpn.calcRpn()) {
+		std::cout << "Error" << std::endl;
+		return 1;	
+	}
 
 	return 0;
 }

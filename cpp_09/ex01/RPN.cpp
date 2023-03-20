@@ -20,10 +20,15 @@ int    RPN::checkInputFormat(void) {
     int                 count_op = 0;
     std::string         str;
     std::istringstream  istream(_rpn);
+
     while (getline(istream, str, ' ')) {
-        if (str.length() != 1)
+        std::cout <<"str='"<< str << "'"<< std::endl;
+        std::cout << "str.length()= " << str.length() << std::endl;
+        if (str.length() == 0)
+            continue;
+        else if (str.length() != 1)
             return 1;
-        if (std::isdigit(str[0]))
+        else if (std::isdigit(str[0]))
             count_nb++;
         else if (str == "*" || str == "+" || str == "-" || str == "/")
             count_op++;
@@ -31,33 +36,36 @@ int    RPN::checkInputFormat(void) {
             return 1;
     }
     if (count_nb < 1 || count_nb != count_op + 1)
-        return 1; 
+        return 1;
     return 0;
 }
 
 int RPN::calcRpn(void) {
     std::istringstream  istream(_rpn);
-    int                 tmp = 0;
+    float               tmp = 0;
     std::string         str;
 
     while (getline(istream, str, ' ')) {
+        if (str.length() == 0)
+            continue;
         if (std::isdigit(str[0]))
-            _stack.push(atoi(str.c_str()));
+            _stack.push(atof(str.c_str()));
         else {
+            if (_stack.size() < 2)
+                return 1;
             tmp = _stack.top();
             _stack.pop();
             if (str == "+")
-                tmp += _stack.top();
+                _stack.top() += tmp ;
             else if (str == "-")
-                tmp -= _stack.top();
+                _stack.top() -= tmp ;
             else if (str == "*")
-                tmp *= _stack.top();
-            else 
-                tmp /= _stack.top();
-            _stack.pop();
-            _stack.push(tmp);
+                _stack.top() *= tmp ;
+            else if (tmp == 0)
+                return 1;
+            else
+                _stack.top() /= tmp ;
         }
-        std::cout << _stack.top() << std::endl;
     }
     std::cout << _stack.top() << std::endl;
     return (0);

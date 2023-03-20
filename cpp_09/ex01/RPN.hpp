@@ -28,7 +28,7 @@ class RPN {
 
     private:
         std::string     _rpn;
-        std::stack<int> _stack;
+        std::stack<float> _stack;
 };
 
 
