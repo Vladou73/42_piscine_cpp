@@ -1,4 +1,5 @@
 //https://en.wikipedia.org/wiki/Merge-insertion_sort
+//https://github.com/decidedlyso/merge-insertion-sort/blob/master/README.md
 
 //choisir le bon conteneur : https://openclassrooms.com/fr/courses/7137751-programmez-en-oriente-objet-avec-c/7532251-utilisez-les-conteneurs#/id/r-7532424
 
@@ -7,8 +8,14 @@
 
 #include "PmergeMe.hpp"
 
-int main()
-{
+int main(int argc, char **argv) {
+	
+	PmergeMe test;
+
+	if (test.checkInputFormat(argc, argv)) {
+		std::cout << "Error : wrong input format" << std::endl;
+		return 1;
+	}
 
 	return (0);
 }

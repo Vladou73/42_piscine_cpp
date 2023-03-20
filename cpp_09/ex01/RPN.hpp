@@ -27,7 +27,7 @@ class RPN {
         int calcRpn(void);
 
     private:
-        std::string     _rpn;
+        std::string       _rpn;
         std::stack<float> _stack;
 };
 

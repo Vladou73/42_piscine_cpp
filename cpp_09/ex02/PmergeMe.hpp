@@ -5,16 +5,31 @@
 // https://en.cppreference.com/w/cpp/container/stack
 //https://stackoverflow.com/questions/525365/does-stdstack-expose-iterators
 
-#ifndef SPAN_HPP
-#define SPAN_HPP
+#ifndef P_MERGE_ME_HPP
+#define P_MERGE_ME_HPP
 
 #include <iostream>
 #include <exception>
-# include <algorithm>
-# include <stack>
-# include <list>
+#include <algorithm>
+#include <stack>
+#include <list>
 #include <cmath>
+#include <cstring>
 
+class PmergeMe {
+    public:
+        PmergeMe();
+        PmergeMe(std::string const &);
+        ~PmergeMe();
+        PmergeMe(PmergeMe const &);
+        PmergeMe const &operator=(PmergeMe const &);
 
+        int checkInputFormat(int const &, char ** const &);
+
+    private:
+        std::list<int>                      _to_sort;
+        std::list<std::pair<int, char> >    _list;
+
+};
 
 #endif

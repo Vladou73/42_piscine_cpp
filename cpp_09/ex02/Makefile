@@ -1,6 +1,6 @@
 NAME =	PmergeMe
 
-SRCS =	main.cpp \
+SRCS =	main.cpp PmergeMe.cpp \
 
 CC = c++
 
