@@ -26,7 +26,7 @@ int isPosInt(char * const &str) {
     return 1;
 }
 
-int PmergeMe::checkInputFormat(int const &argc, char ** const &argv) {
+int PmergeMe::CheckStoreInput(int const &argc, char ** const &argv) {
     int i = 1;
     long long int   tmp;
 
@@ -44,9 +44,24 @@ int PmergeMe::checkInputFormat(int const &argc, char ** const &argv) {
         _to_sort.push_back(tmp);
         i++;
     }
-
 	for (std::list<int>::iterator it = _to_sort.begin(); it !=_to_sort.end(); it++)
         std::cout << *it << std::endl;
-
     return 0;
+}
+
+void PmergeMe::MakePairs(void) {
+	// for (std::list<int>::iterator it = _to_sort.begin(); it !=_to_sort.end(); it++)
+    //     std::cout << it - _to_sort.begin() << std::endl;
+    
+    for (size_t i = 0; i < _to_sort.size(); i++) {
+        if (_list.size() < ( i / 2)) {    
+            
+            if (!(i % 2))
+
+        }
+
+        
+        
+        
+    }
 }

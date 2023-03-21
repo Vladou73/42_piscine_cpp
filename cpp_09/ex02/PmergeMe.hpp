@@ -24,7 +24,8 @@ class PmergeMe {
         PmergeMe(PmergeMe const &);
         PmergeMe const &operator=(PmergeMe const &);
 
-        int checkInputFormat(int const &, char ** const &);
+        int     CheckStoreInput(int const &, char ** const &);
+        void    MakePairs(void);
 
     private:
         std::list<int>                      _to_sort;

@@ -12,10 +12,13 @@ int main(int argc, char **argv) {
 	
 	PmergeMe test;
 
-	if (test.checkInputFormat(argc, argv)) {
+	if (test.CheckStoreInput(argc, argv)) {
 		std::cout << "Error : wrong input format" << std::endl;
 		return 1;
 	}
+
+	test.MakePairs();
+
 
 	return (0);
 }
