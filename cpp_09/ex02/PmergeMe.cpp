@@ -44,24 +44,25 @@ int PmergeMe::CheckStoreInput(int const &argc, char ** const &argv) {
         _to_sort.push_back(tmp);
         i++;
     }
-	for (std::list<int>::iterator it = _to_sort.begin(); it !=_to_sort.end(); it++)
-        std::cout << *it << std::endl;
+	// for (std::list<int>::iterator it = _to_sort.begin(); it !=_to_sort.end(); it++)
+    //     std::cout << *it << std::endl;
     return 0;
 }
 
 void PmergeMe::MakePairs(void) {
-	// for (std::list<int>::iterator it = _to_sort.begin(); it !=_to_sort.end(); it++)
-    //     std::cout << it - _to_sort.begin() << std::endl;
-    
-    for (size_t i = 0; i < _to_sort.size(); i++) {
-        if (_list.size() < ( i / 2)) {    
-            
-            if (!(i % 2))
+    int i = 0;
 
-        }
-
-        
-        
-        
+    for (std::list<int>::iterator it = _to_sort.begin(); it !=_to_sort.end(); it++) {
+        if (!(i % 2))
+            _list.push_back(std::make_pair(*it, 0));
+        else
+            _list.back().second = *it;
+        i++;
     }
+
+	for (std::list<std::pair<int, int> >::iterator it = _list.begin(); it !=_list.end(); it++)
+        std::cout << "first =" <<(*it).first << ", second =" <<(*it).second <<  std::endl;
+
+
+
 }

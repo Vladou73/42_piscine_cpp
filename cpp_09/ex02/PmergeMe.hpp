@@ -29,7 +29,7 @@ class PmergeMe {
 
     private:
         std::list<int>                      _to_sort;
-        std::list<std::pair<int, char> >    _list;
+        std::list<std::pair<int, int> >    _list;
 
 };
 
