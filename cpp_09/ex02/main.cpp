@@ -9,7 +9,7 @@
 #include "PmergeMe.hpp"
 
 int main(int argc, char **argv) {
-	
+
 	PmergeMe test;
 
 	if (test.CheckStoreInput(argc, argv)) {
@@ -18,7 +18,7 @@ int main(int argc, char **argv) {
 	}
 
 	test.MakePairs();
-
+	test.SwapPairs();
 
 	return (0);
 }

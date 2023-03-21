@@ -26,6 +26,7 @@ class PmergeMe {
 
         int     CheckStoreInput(int const &, char ** const &);
         void    MakePairs(void);
+        void    SwapPairs(void);
 
     private:
         std::list<int>                      _to_sort;

@@ -59,10 +59,14 @@ void PmergeMe::MakePairs(void) {
             _list.back().second = *it;
         i++;
     }
+}
+
+void PmergeMe::SwapPairs(void) {
+	for (std::list<std::pair<int, int> >::iterator it = _list.begin(); it !=_list.end(); it++) {
+        if ((*it).first > (*it).second)
+            std::swap((*it).first, (*it).second);
+    }
 
 	for (std::list<std::pair<int, int> >::iterator it = _list.begin(); it !=_list.end(); it++)
         std::cout << "first =" <<(*it).first << ", second =" <<(*it).second <<  std::endl;
-
-
-
 }
