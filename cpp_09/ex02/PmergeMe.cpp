@@ -73,6 +73,12 @@ void PmergeMe::SwapPairs(void) {
 
     this->RecursiveMergeSort(_list);
 
+    // std::cout << std::endl << "*********** MAIN LIST AFTER REC MERGE SORT***********" << std::endl;
+	// for (std::list<std::pair<int, int> >::iterator it = _list.begin(); it !=_list.end(); it++)
+    //     std::cout << "first =" <<(*it).first << ", second =" <<(*it).second <<  std::endl;
+
+
+
 }
 
 // mergeSort(arr, size)
@@ -90,6 +96,10 @@ void PmergeMe::SwapPairs(void) {
 
 // Step 4: Call the merge function to merge these two halves       mergeTwoSortedArray(leftSubArray, rightSubArray, arr,
 // leftSize, rightSize)
+
+bool compareFirst (std::pair<int, int> right, std::pair<int, int> left) {
+    return (right.first < left.first);
+}
 
 void PmergeMe::RecursiveMergeSort(std::list<std::pair<int, int> > myList) {
     if (myList.size() < 2)
@@ -115,7 +125,17 @@ void PmergeMe::RecursiveMergeSort(std::list<std::pair<int, int> > myList) {
 
     PmergeMe::RecursiveMergeSort(left_list);
     PmergeMe::RecursiveMergeSort(right_list);
-    // PmergeMe::MergeTwoSortedArrays(left_list, right_list, myList, left_size, right_size);
+
+    // Merge sorted lists
+    left_list.merge(right_list, compareFirst);
+    myList = left_list;
+
+    std::cout << std::endl << "right_list.size()=" << right_list.size() << std::endl;
+
+    std::cout << std::endl << "*********** MAIN LIST AFTER REC MERGE SORT***********" << std::endl;
+	for (std::list<std::pair<int, int> >::iterator it = myList.begin(); it !=myList.end(); it++)
+        std::cout << "first =" <<(*it).first << ", second =" <<(*it).second << std::endl;
+
 }
 
 
