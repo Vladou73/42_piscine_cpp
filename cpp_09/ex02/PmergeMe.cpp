@@ -67,6 +67,60 @@ void PmergeMe::SwapPairs(void) {
             std::swap((*it).first, (*it).second);
     }
 
+    std::cout << std::endl << "*********** MAIN LIST ***********" << std::endl;
 	for (std::list<std::pair<int, int> >::iterator it = _list.begin(); it !=_list.end(); it++)
         std::cout << "first =" <<(*it).first << ", second =" <<(*it).second <<  std::endl;
+
+    this->RecursiveMergeSort(_list);
+
 }
+
+// mergeSort(arr, size)
+// If  size > 1
+
+// Step 1: Find the size of the leftSubArray and rightSubArray so that we can divide the array into two-part
+// leftSize = size / 2;
+// rightSize = size - leftSize;
+
+// Step 2: Call the mergesort for the leftSubArray
+// mergeSort(leftSubArray, leftSize);
+
+// Step 3: Call the mergesort for the rightSubArray
+// mergeSort(rightSubArray, rightSize);
+
+// Step 4: Call the merge function to merge these two halves       mergeTwoSortedArray(leftSubArray, rightSubArray, arr,
+// leftSize, rightSize)
+
+void PmergeMe::RecursiveMergeSort(std::list<std::pair<int, int> > myList) {
+    if (myList.size() < 2)
+        return;
+
+    std::list<std::pair<int, int> > left_list, right_list;
+
+    std::list<std::pair<int, int> >::iterator middle = myList.begin();
+    for (size_t i = 0; i < myList.size() / 2; i++)
+        middle++;
+
+    myList.splice(left_list.begin(), left_list, myList.begin(), middle);
+    myList.splice(right_list.begin(), right_list, myList.begin(), myList.end());
+
+    std::cout <<  std::endl << "*********** LEFT LIST ***********" << std::endl;
+	for (std::list<std::pair<int, int> >::iterator it = left_list.begin(); it !=left_list.end(); it++)
+        std::cout << "first =" <<(*it).first << ", second =" <<(*it).second <<  std::endl;
+
+    std::cout<< std::endl << "*********** RIGHT LIST ***********" << std::endl;
+	for (std::list<std::pair<int, int> >::iterator it = right_list.begin(); it !=right_list.end(); it++)
+        std::cout << "first =" <<(*it).first << ", second =" <<(*it).second <<  std::endl;
+
+
+    PmergeMe::RecursiveMergeSort(left_list);
+    PmergeMe::RecursiveMergeSort(right_list);
+    // PmergeMe::MergeTwoSortedArrays(left_list, right_list, myList, left_size, right_size);
+}
+
+
+
+
+// std::list::merge
+// Merge sorted lists
+// Merges x into the list by transferring all of its elements at their respective ordered positions into the container (both containers shall already be ordered).

@@ -1,5 +1,6 @@
 //https://en.wikipedia.org/wiki/Merge-insertion_sort
 //https://github.com/decidedlyso/merge-insertion-sort/blob/master/README.md
+//https://www.codingninjas.com/codestudio/library/merge-sort-pseudocode-in-cc
 
 //choisir le bon conteneur : https://openclassrooms.com/fr/courses/7137751-programmez-en-oriente-objet-avec-c/7532251-utilisez-les-conteneurs#/id/r-7532424
 
