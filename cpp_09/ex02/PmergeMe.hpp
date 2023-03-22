@@ -28,10 +28,12 @@ class PmergeMe {
         void    MakePairs(void);
         void    SwapPairs(void);
         void    RecursiveMergeSort(std::list<std::pair<int, int> > &myList, size_t size);
+        void    InsertionSort(void);
 
     private:
         std::list<int>                      _to_sort;
-        std::list<std::pair<int, int> >    _list;
+        std::list<int>                      _sorted;
+        std::list<std::pair<int, int> >      _list;
 
 };
 

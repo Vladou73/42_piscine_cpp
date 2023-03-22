@@ -44,8 +44,6 @@ int PmergeMe::CheckStoreInput(int const &argc, char ** const &argv) {
         _to_sort.push_back(tmp);
         i++;
     }
-	// for (std::list<int>::iterator it = _to_sort.begin(); it !=_to_sort.end(); it++)
-    //     std::cout << *it << std::endl;
     return 0;
 }
 
@@ -63,7 +61,7 @@ void PmergeMe::MakePairs(void) {
 
 void PmergeMe::SwapPairs(void) {
 	for (std::list<std::pair<int, int> >::iterator it = _list.begin(); it !=_list.end(); it++) {
-        if ((*it).first > (*it).second)
+        if ((*it).first < (*it).second)
             std::swap((*it).first, (*it).second);
     }
 
@@ -112,6 +110,25 @@ void PmergeMe::RecursiveMergeSort(std::list<std::pair<int, int> > &myList, size_
     // Merge sorted lists
     myList = left_list;
     myList.merge(right_list, compareFirst);
+}
+
+void PmergeMe::InsertionSort() {
+    int i = 0;
+    for (std::list<std::pair<int, int> >::iterator it = _list.begin(); it !=_list.end(); it++) {
+        if (i == 0)
+            _sorted.push_back(it->second);
+        _sorted.push_back(it->first);
+        i++;
+    }
+
+
+    std::cout << std::endl << "*********** _sorted LIST ***********" << std::endl;
+	for (std::list<int>::iterator it = _sorted.begin(); it !=_sorted.end(); it++)
+        std::cout << *it <<  std::endl;
+
+
+
+    std::cout << std::endl << "_sorted.size()=" << _sorted.size() << std::endl;
 }
 
 
