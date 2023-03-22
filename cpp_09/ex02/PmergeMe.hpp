@@ -29,6 +29,7 @@ class PmergeMe {
         void    SwapPairs(void);
         void    RecursiveMergeSort(std::list<std::pair<int, int> > &myList, size_t size);
         void    InsertionSort(void);
+        void    BinarySearch(int  toInsert);
 
     private:
         std::list<int>                      _to_sort;

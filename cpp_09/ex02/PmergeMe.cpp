@@ -64,19 +64,11 @@ void PmergeMe::SwapPairs(void) {
         if ((*it).first < (*it).second)
             std::swap((*it).first, (*it).second);
     }
-
-    std::cout << std::endl << "*********** MAIN LIST ***********" << std::endl;
-	for (std::list<std::pair<int, int> >::iterator it = _list.begin(); it !=_list.end(); it++)
-        std::cout << "first =" <<(*it).first << ", second =" <<(*it).second <<  std::endl;
-
-    std::cout << std::endl << "_list.size()=" << _list.size() << std::endl;
-
     this->RecursiveMergeSort(_list, _list.size());
 
-    std::cout << std::endl << "*********** MAIN LIST AFTER REC MERGE SORT***********" << std::endl;
+    std::cout << std::endl << "*********** LIST PAIRS AFTER MERGE SORT ***********" << std::endl;
 	for (std::list<std::pair<int, int> >::iterator it = _list.begin(); it !=_list.end(); it++)
         std::cout << "first =" <<(*it).first << ", second =" <<(*it).second <<  std::endl;
-
     std::cout << std::endl << "_list.size()=" << _list.size() << std::endl;
 }
 
@@ -112,28 +104,66 @@ void PmergeMe::RecursiveMergeSort(std::list<std::pair<int, int> > &myList, size_
     myList.merge(right_list, compareFirst);
 }
 
+void    PmergeMe::BinarySearch(int  toInsert) {
+    int L = 0;
+    int R = _sorted.size() - 1;
+    int i;
+
+	for (std::list<int>::iterator it = _sorted.begin(); it !=_sorted.end(); it++)
+        std::cout <<  *it <<  std::endl;
+
+    std::list<int>::iterator middle;
+    std::list<int>::iterator checkDuplicates;
+
+    while (L <= R) {
+        std::cout << "L=" << L << ", R=" << R << ", (L + R) / 2=" << (L + R) / 2 <<  std::endl;
+        middle = _sorted.begin();
+        for (i = 0; i < (L + R) / 2; i++)
+            middle++;
+        std::cout << "i= " << i << ", middle= " << *middle << std::endl;
+        if (toInsert > *middle) {
+            L = i + 1;
+            if (L > R)
+                middle++;
+        } else if (toInsert < *middle) {
+            R = i - 1;
+        } else {
+            std::cout << "insert " << toInsert << " at position " << i << std::endl;
+            _sorted.insert(middle, toInsert);
+            return;
+        }
+    }
+    std::cout <<  std::endl << "L=" << L << ", R=" << R <<  std::endl;
+    std::cout << "insert " << toInsert << " at position " << i << std::endl;
+    if (R == -1)
+        middle = _sorted.begin();
+    // else if (L > R)
+    //     middle++;
+    _sorted.insert(middle, toInsert);
+}
+
+//./PmergeMe 50 1 7 9 89 40 78 77 76 80 0 2
+
 void PmergeMe::InsertionSort() {
-    int i = 0;
+    int idx = 0;
     for (std::list<std::pair<int, int> >::iterator it = _list.begin(); it !=_list.end(); it++) {
-        if (i == 0)
-            _sorted.push_back(it->second);
+        // if (idx == 0)
+        //     _sorted.push_back(it->second);
         _sorted.push_back(it->first);
-        i++;
+        idx++;
     }
 
+    idx = 0;
+    for (std::list<std::pair<int, int> >::iterator toInsert = _list.begin(); toInsert !=_list.end(); toInsert++) {
+        // if (idx > 0)
+        std::cout <<  std::endl;
+        std::cout << "toInsert second =" <<(*toInsert).second <<  std::endl;
+        PmergeMe::BinarySearch(toInsert->second);
+        idx++;
+    }
 
     std::cout << std::endl << "*********** _sorted LIST ***********" << std::endl;
 	for (std::list<int>::iterator it = _sorted.begin(); it !=_sorted.end(); it++)
         std::cout << *it <<  std::endl;
-
-
-
     std::cout << std::endl << "_sorted.size()=" << _sorted.size() << std::endl;
 }
-
-
-
-
-// std::list::merge
-// Merge sorted lists
-// Merges x into the list by transferring all of its elements at their respective ordered positions into the container (both containers shall already be ordered).
