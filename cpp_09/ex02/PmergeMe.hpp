@@ -27,7 +27,7 @@ class PmergeMe {
         int     CheckStoreInput(int const &, char ** const &);
         void    MakePairs(void);
         void    SwapPairs(void);
-        void    RecursiveMergeSort(std::list<std::pair<int, int> > myList);
+        void    RecursiveMergeSort(std::list<std::pair<int, int> > &myList, size_t size);
 
     private:
         std::list<int>                      _to_sort;
