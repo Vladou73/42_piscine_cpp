@@ -30,11 +30,15 @@ class PmergeMe {
         void    RecursiveMergeSort(std::list<std::pair<int, int> > &myList, size_t size);
         void    InsertionSort(void);
         void    BinarySearch(int  toInsert);
+        void    PutResults(void);
 
     private:
         std::list<int>                      _to_sort;
         std::list<int>                      _sorted;
-        std::list<std::pair<int, int> >      _list;
+        std::list<std::pair<int, int> >     _list;
+        time_t                              _list_start_time;
+        time_t                              _list_end_time;
+
 
 };
 

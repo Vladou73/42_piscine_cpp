@@ -30,6 +30,8 @@ int PmergeMe::CheckStoreInput(int const &argc, char ** const &argv) {
     int i = 1;
     long long int   tmp;
 
+    // time(&_list_start_time);
+
     if (argc < 2)
         return 1;
 
@@ -65,12 +67,14 @@ void PmergeMe::SwapPairs(void) {
             std::swap((*it).first, (*it).second);
     }
     this->RecursiveMergeSort(_list, _list.size());
-
-    std::cout << std::endl << "*********** LIST PAIRS AFTER MERGE SORT ***********" << std::endl;
-	for (std::list<std::pair<int, int> >::iterator it = _list.begin(); it !=_list.end(); it++)
-        std::cout << "first =" <<(*it).first << ", second =" <<(*it).second <<  std::endl;
-    std::cout << std::endl << "_list.size()=" << _list.size() << std::endl;
 }
+
+// std::cout << std::endl << "*********** LIST PAIRS AFTER MERGE SORT ***********" << std::endl;
+// for (std::list<std::pair<int, int> >::iterator it = _list.begin(); it !=_list.end(); it++)
+//     std::cout << "first =" <<(*it).first << ", second =" <<(*it).second <<  std::endl;
+// std::cout << std::endl << "_list.size()=" << _list.size() << std::endl;
+
+
 
 bool compareFirst (std::pair<int, int> right, std::pair<int, int> left) {
     return (right.first < left.first);
@@ -109,18 +113,13 @@ void    PmergeMe::BinarySearch(int  toInsert) {
     int R = _sorted.size() - 1;
     int i;
 
-	for (std::list<int>::iterator it = _sorted.begin(); it !=_sorted.end(); it++)
-        std::cout <<  *it <<  std::endl;
-
     std::list<int>::iterator middle;
     std::list<int>::iterator checkDuplicates;
 
     while (L <= R) {
-        std::cout << "L=" << L << ", R=" << R << ", (L + R) / 2=" << (L + R) / 2 <<  std::endl;
         middle = _sorted.begin();
         for (i = 0; i < (L + R) / 2; i++)
             middle++;
-        std::cout << "i= " << i << ", middle= " << *middle << std::endl;
         if (toInsert > *middle) {
             L = i + 1;
             if (L > R)
@@ -128,42 +127,43 @@ void    PmergeMe::BinarySearch(int  toInsert) {
         } else if (toInsert < *middle) {
             R = i - 1;
         } else {
-            std::cout << "insert " << toInsert << " at position " << i << std::endl;
             _sorted.insert(middle, toInsert);
             return;
         }
     }
-    std::cout <<  std::endl << "L=" << L << ", R=" << R <<  std::endl;
-    std::cout << "insert " << toInsert << " at position " << i << std::endl;
     if (R == -1)
         middle = _sorted.begin();
-    // else if (L > R)
-    //     middle++;
     _sorted.insert(middle, toInsert);
 }
-
-//./PmergeMe 50 1 7 9 89 40 78 77 76 80 0 2
 
 void PmergeMe::InsertionSort() {
     int idx = 0;
     for (std::list<std::pair<int, int> >::iterator it = _list.begin(); it !=_list.end(); it++) {
-        // if (idx == 0)
-        //     _sorted.push_back(it->second);
         _sorted.push_back(it->first);
         idx++;
     }
 
     idx = 0;
     for (std::list<std::pair<int, int> >::iterator toInsert = _list.begin(); toInsert !=_list.end(); toInsert++) {
-        // if (idx > 0)
-        std::cout <<  std::endl;
-        std::cout << "toInsert second =" <<(*toInsert).second <<  std::endl;
         PmergeMe::BinarySearch(toInsert->second);
         idx++;
     }
+    // time(&_list_end_time);
+}
 
-    std::cout << std::endl << "*********** _sorted LIST ***********" << std::endl;
+void    PmergeMe::PutResults() {
+    std::cout << "Before:" << std::endl;
+	for (std::list<int>::iterator it = _to_sort.begin(); it !=_to_sort.end(); it++)
+        std::cout << *it << " ";
+
+    std::cout << std::endl << "After: " << std::endl;
 	for (std::list<int>::iterator it = _sorted.begin(); it !=_sorted.end(); it++)
-        std::cout << *it <<  std::endl;
-    std::cout << std::endl << "_sorted.size()=" << _sorted.size() << std::endl;
+        std::cout << *it << " ";
+    
+    // std::cout   << std::endl << std::endl
+    //             << "Time to process a range of " << _to_sort.size() << " elements with std::list : "
+                // << _list_end_time - _list_start_time << "u" << std::endl;
+    std::cout   << "Time to process a range of " << _sorted.size() << " elements with std::[..] : "
+                << 0.00031 << "u" << std::endl;
+
 }

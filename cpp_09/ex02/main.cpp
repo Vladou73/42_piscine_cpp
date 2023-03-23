@@ -21,6 +21,7 @@ int main(int argc, char **argv) {
 	test.MakePairs();
 	test.SwapPairs();
 	test.InsertionSort();
+	test.PutResults();
 
 	return (0);
 }
