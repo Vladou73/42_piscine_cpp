@@ -54,7 +54,7 @@ void PmergeMe::MakePairs(void) {
 
     for (std::list<int>::iterator it = _to_sort.begin(); it !=_to_sort.end(); it++) {
         if (!(i % 2))
-            _list.push_back(std::make_pair(*it, 0));
+            _list.push_back(std::make_pair(*it, -1));
         else
             _list.back().second = *it;
         i++;
@@ -67,6 +67,11 @@ void PmergeMe::SwapPairs(void) {
             std::swap((*it).first, (*it).second);
     }
     this->RecursiveMergeSort(_list, _list.size());
+
+    std::cout << std::endl << "*********** LIST PAIRS AFTER MERGE SORT ***********" << std::endl;
+    for (std::list<std::pair<int, int> >::iterator it = _list.begin(); it !=_list.end(); it++)
+        std::cout << "first =" <<(*it).first << ", second =" <<(*it).second <<  std::endl;
+    std::cout << std::endl << "_list.size()=" << _list.size() << std::endl;
 }
 
 // std::cout << std::endl << "*********** LIST PAIRS AFTER MERGE SORT ***********" << std::endl;
@@ -145,7 +150,8 @@ void PmergeMe::InsertionSort() {
 
     idx = 0;
     for (std::list<std::pair<int, int> >::iterator toInsert = _list.begin(); toInsert !=_list.end(); toInsert++) {
-        PmergeMe::BinarySearch(toInsert->second);
+        if (toInsert->second >= 0)
+            PmergeMe::BinarySearch(toInsert->second);
         idx++;
     }
     time(&_list_end_time);
@@ -166,5 +172,4 @@ void    PmergeMe::PutResults() {
 
     std::cout   << "Time to process a range of " << _sorted.size() << " elements with std::[..] : "
                 << 0.00031 << "u" << std::endl;
-
 }
