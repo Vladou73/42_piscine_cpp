@@ -30,7 +30,7 @@ int PmergeMe::CheckStoreInput(int const &argc, char ** const &argv) {
     int i = 1;
     long long int   tmp;
 
-    // time(&_list_start_time);
+    time(&_list_start_time);
 
     if (argc < 2)
         return 1;
@@ -148,7 +148,7 @@ void PmergeMe::InsertionSort() {
         PmergeMe::BinarySearch(toInsert->second);
         idx++;
     }
-    // time(&_list_end_time);
+    time(&_list_end_time);
 }
 
 void    PmergeMe::PutResults() {
@@ -159,10 +159,11 @@ void    PmergeMe::PutResults() {
     std::cout << std::endl << "After: " << std::endl;
 	for (std::list<int>::iterator it = _sorted.begin(); it !=_sorted.end(); it++)
         std::cout << *it << " ";
-    
-    // std::cout   << std::endl << std::endl
-    //             << "Time to process a range of " << _to_sort.size() << " elements with std::list : "
-                // << _list_end_time - _list_start_time << "u" << std::endl;
+
+    std::cout   << std::endl << std::endl
+                << "Time to process a range of " << _to_sort.size() << " elements with std::list : "
+                << (unsigned long) difftime(_list_end_time, _list_start_time) << " seconds" << std::endl;
+
     std::cout   << "Time to process a range of " << _sorted.size() << " elements with std::[..] : "
                 << 0.00031 << "u" << std::endl;
 

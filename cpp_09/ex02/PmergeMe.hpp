@@ -15,6 +15,8 @@
 #include <list>
 #include <cmath>
 #include <cstring>
+#include <cstdlib>
+#include <unistd.h>
 
 class PmergeMe {
     public:
