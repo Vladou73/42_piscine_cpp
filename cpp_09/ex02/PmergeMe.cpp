@@ -9,7 +9,7 @@ PmergeMe const &PmergeMe::operator=(PmergeMe const &toCopy) {
     if (this == &toCopy)
         return *this;
     _list = toCopy._list;
-    _to_sort = toCopy._to_sort;
+    _list_to_sort = toCopy._list_to_sort;
     return *this;
 }
 
@@ -43,7 +43,21 @@ int PmergeMe::CheckStoreInput(int const &argc, char ** const &argv) {
         tmp = atol(argv[i]);
         if (tmp < 0 || tmp > 2147483647)
             return 1;
-        _to_sort.push_back(tmp);
+        _list_to_sort.push_back(tmp);
+        i++;
+    }
+    return 0;
+}
+
+int PmergeMe::StoreInputVec(int const &argc, char ** const &argv) {
+    int i = 1;
+    long long int   tmp;
+
+    time(&_vector_start_time);
+
+    while (i < argc) {
+        tmp = atol(argv[i]);
+        _to_sort_vector.push_back(tmp);
         i++;
     }
     return 0;
@@ -52,11 +66,23 @@ int PmergeMe::CheckStoreInput(int const &argc, char ** const &argv) {
 void PmergeMe::MakePairs(void) {
     int i = 0;
 
-    for (std::list<int>::iterator it = _to_sort.begin(); it !=_to_sort.end(); it++) {
+    for (std::list<int>::iterator it = _list_to_sort.begin(); it !=_list_to_sort.end(); it++) {
         if (!(i % 2))
             _list.push_back(std::make_pair(*it, -1));
         else
             _list.back().second = *it;
+        i++;
+    }
+}
+
+void PmergeMe::MakePairsVec(void) {
+    int i = 0;
+
+    for (std::vector<int>::iterator it = _to_sort_vector.begin(); it !=_to_sort_vector.end(); it++) {
+        if (!(i % 2))
+            _vector.push_back(std::make_pair(*it, -1));
+        else
+            _vector.back().second = *it;
         i++;
     }
 }
@@ -67,11 +93,14 @@ void PmergeMe::SwapPairs(void) {
             std::swap((*it).first, (*it).second);
     }
     this->RecursiveMergeSort(_list, _list.size());
+}
 
-    std::cout << std::endl << "*********** LIST PAIRS AFTER MERGE SORT ***********" << std::endl;
-    for (std::list<std::pair<int, int> >::iterator it = _list.begin(); it !=_list.end(); it++)
-        std::cout << "first =" <<(*it).first << ", second =" <<(*it).second <<  std::endl;
-    std::cout << std::endl << "_list.size()=" << _list.size() << std::endl;
+void PmergeMe::SwapPairsVec(void) {
+	for (std::vector<std::pair<int, int> >::iterator it = _vector.begin(); it !=_vector.end(); it++) {
+        if ((*it).first < (*it).second)
+            std::swap((*it).first, (*it).second);
+    }
+    this->RecursiveMergeSortVec(_vector);
 }
 
 // std::cout << std::endl << "*********** LIST PAIRS AFTER MERGE SORT ***********" << std::endl;
@@ -79,10 +108,40 @@ void PmergeMe::SwapPairs(void) {
 //     std::cout << "first =" <<(*it).first << ", second =" <<(*it).second <<  std::endl;
 // std::cout << std::endl << "_list.size()=" << _list.size() << std::endl;
 
-
-
-bool compareFirst (std::pair<int, int> right, std::pair<int, int> left) {
+bool compareFirst(std::pair<int, int> right, std::pair<int, int> left) {
     return (right.first < left.first);
+}
+
+std::vector<std::pair<int, int> >    mergeSortedVecs(
+    std::vector<std::pair<int, int> > &left_arr,
+    std::vector<std::pair<int, int> > &right_arr
+)
+{
+    std::vector<std::pair<int, int> >::iterator r = right_arr.begin();
+    std::vector<std::pair<int, int> >::iterator l = left_arr.begin();
+    std::vector<std::pair<int, int> > res;
+
+    while ((r != right_arr.end())) {
+        if (l == left_arr.end())
+            break;
+        if (r->first < l->first) {
+            res.push_back(*r);
+            r++;
+        }
+        else {
+            res.push_back(*l);
+            l++;
+        }
+    }
+    while (r != right_arr.end()) {
+        res.push_back(*r);
+        r++;
+    }
+    while (l != left_arr.end()) {
+        res.push_back(*l);
+        l++;
+    }
+    return res;
 }
 
 void PmergeMe::RecursiveMergeSort(std::list<std::pair<int, int> > &myList, size_t size) {
@@ -113,16 +172,37 @@ void PmergeMe::RecursiveMergeSort(std::list<std::pair<int, int> > &myList, size_
     myList.merge(right_list, compareFirst);
 }
 
+void PmergeMe::RecursiveMergeSortVec(std::vector<std::pair<int, int> > &myArr) {
+
+    std::vector<std::pair<int, int> > left_arr, right_arr;
+
+    if (myArr.size() < 2)
+        return;
+
+    std::vector<std::pair<int, int> >::iterator middle = myArr.begin();
+    for (size_t i = 0; i < myArr.size() / 2; i++)
+        middle++;
+
+    left_arr.assign(myArr.begin(), middle);
+    right_arr.assign(middle, myArr.end());
+
+    PmergeMe::RecursiveMergeSortVec(left_arr);
+    PmergeMe::RecursiveMergeSortVec(right_arr);
+
+    // Merge sorted lists
+    myArr = mergeSortedVecs(left_arr, right_arr);
+
+}
+
 void    PmergeMe::BinarySearch(int  toInsert) {
     int L = 0;
-    int R = _sorted.size() - 1;
+    int R = _sorted_list.size() - 1;
     int i;
 
     std::list<int>::iterator middle;
-    std::list<int>::iterator checkDuplicates;
 
     while (L <= R) {
-        middle = _sorted.begin();
+        middle = _sorted_list.begin();
         for (i = 0; i < (L + R) / 2; i++)
             middle++;
         if (toInsert > *middle) {
@@ -132,44 +212,81 @@ void    PmergeMe::BinarySearch(int  toInsert) {
         } else if (toInsert < *middle) {
             R = i - 1;
         } else {
-            _sorted.insert(middle, toInsert);
+            _sorted_list.insert(middle, toInsert);
             return;
         }
     }
     if (R == -1)
-        middle = _sorted.begin();
-    _sorted.insert(middle, toInsert);
+        middle = _sorted_list.begin();
+    _sorted_list.insert(middle, toInsert);
+}
+
+void    PmergeMe::BinarySearchVec(int  toInsert) {
+    int L = 0;
+    int R = _sorted_vector.size() - 1;
+    int i;
+
+    std::vector<int>::iterator middle;
+
+    while (L <= R) {
+        middle = _sorted_vector.begin();
+        for (i = 0; i < (L + R) / 2; i++)
+            middle++;
+        if (toInsert > *middle) {
+            L = i + 1;
+            if (L > R)
+                middle++;
+        } else if (toInsert < *middle) {
+            R = i - 1;
+        } else {
+            _sorted_vector.insert(middle, toInsert);
+            return;
+        }
+    }
+    if (R == -1)
+        middle = _sorted_vector.begin();
+    _sorted_vector.insert(middle, toInsert);
 }
 
 void PmergeMe::InsertionSort() {
-    int idx = 0;
-    for (std::list<std::pair<int, int> >::iterator it = _list.begin(); it !=_list.end(); it++) {
-        _sorted.push_back(it->first);
-        idx++;
-    }
+    for (std::list<std::pair<int, int> >::iterator it = _list.begin(); it !=_list.end(); it++)
+        _sorted_list.push_back(it->first);
 
-    idx = 0;
     for (std::list<std::pair<int, int> >::iterator toInsert = _list.begin(); toInsert !=_list.end(); toInsert++) {
         if (toInsert->second >= 0)
             PmergeMe::BinarySearch(toInsert->second);
-        idx++;
     }
     time(&_list_end_time);
 }
 
+void PmergeMe::InsertionSortVec() {
+    for (std::vector<std::pair<int, int> >::iterator it = _vector.begin(); it != _vector.end(); it++)
+        _sorted_vector.push_back(it->first);
+
+    for (std::vector<std::pair<int, int> >::iterator toInsert = _vector.begin(); toInsert !=_vector.end(); toInsert++) {
+        if (toInsert->second >= 0)
+            PmergeMe::BinarySearchVec(toInsert->second);
+    }
+    time(&_vector_end_time);
+}
+
 void    PmergeMe::PutResults() {
     std::cout << "Before:" << std::endl;
-	for (std::list<int>::iterator it = _to_sort.begin(); it !=_to_sort.end(); it++)
+	for (std::list<int>::iterator it = _list_to_sort.begin(); it !=_list_to_sort.end(); it++)
         std::cout << *it << " ";
 
-    std::cout << std::endl << "After: " << std::endl;
-	for (std::list<int>::iterator it = _sorted.begin(); it !=_sorted.end(); it++)
+    std::cout << std::endl << "After list: " << std::endl;
+	for (std::list<int>::iterator it = _sorted_list.begin(); it !=_sorted_list.end(); it++)
+        std::cout << *it << " ";
+
+    std::cout << std::endl << "After vector: " << std::endl;
+	for (std::vector<int>::iterator it = _sorted_vector.begin(); it !=_sorted_vector.end(); it++)
         std::cout << *it << " ";
 
     std::cout   << std::endl << std::endl
-                << "Time to process a range of " << _to_sort.size() << " elements with std::list : "
+                << "Time to process a range of " << _list_to_sort.size() << " elements with std::list : "
                 << (unsigned long) difftime(_list_end_time, _list_start_time) << " seconds" << std::endl;
 
-    std::cout   << "Time to process a range of " << _sorted.size() << " elements with std::[..] : "
-                << 0.00031 << "u" << std::endl;
+    std::cout   << "Time to process a range of " << _sorted_list.size() << " elements with std::vector : "
+                << (unsigned long) difftime(_vector_end_time, _vector_start_time) << " seconds" << std::endl;
 }

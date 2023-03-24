@@ -21,6 +21,12 @@ int main(int argc, char **argv) {
 	test.MakePairs();
 	test.SwapPairs();
 	test.InsertionSort();
+
+	test.StoreInputVec(argc, argv);
+	test.MakePairsVec();
+	test.SwapPairsVec();
+	test.InsertionSortVec();
+
 	test.PutResults();
 
 	return (0);
