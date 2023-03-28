@@ -22,8 +22,8 @@ int    RPN::checkInputFormat(void) {
     std::istringstream  istream(_rpn);
 
     while (getline(istream, str, ' ')) {
-        std::cout <<"str='"<< str << "'"<< std::endl;
-        std::cout << "str.length()= " << str.length() << std::endl;
+        // std::cout <<"str='"<< str << "'"<< std::endl;
+        // std::cout << "str.length()= " << str.length() << std::endl;
         if (str.length() == 0)
             continue;
         else if (str.length() != 1)
