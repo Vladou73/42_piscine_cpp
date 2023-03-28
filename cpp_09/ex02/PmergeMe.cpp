@@ -30,7 +30,7 @@ int PmergeMe::CheckStoreInput(int const &argc, char ** const &argv) {
     int i = 1;
     long long int   tmp;
 
-    time(&_list_start_time);
+    _list_time = clock();
 
     if (argc < 2)
         return 1;
@@ -53,7 +53,7 @@ int PmergeMe::StoreInputVec(int const &argc, char ** const &argv) {
     int i = 1;
     long long int   tmp;
 
-    time(&_vector_start_time);
+    _vector_time = clock();
 
     while (i < argc) {
         tmp = atol(argv[i]);
@@ -102,11 +102,6 @@ void PmergeMe::SwapPairsVec(void) {
     }
     this->RecursiveMergeSortVec(_vector);
 }
-
-// std::cout << std::endl << "*********** LIST PAIRS AFTER MERGE SORT ***********" << std::endl;
-// for (std::list<std::pair<int, int> >::iterator it = _list.begin(); it !=_list.end(); it++)
-//     std::cout << "first =" <<(*it).first << ", second =" <<(*it).second <<  std::endl;
-// std::cout << std::endl << "_list.size()=" << _list.size() << std::endl;
 
 bool compareFirst(std::pair<int, int> right, std::pair<int, int> left) {
     return (right.first < left.first);
@@ -256,7 +251,7 @@ void PmergeMe::InsertionSort() {
         if (toInsert->second >= 0)
             PmergeMe::BinarySearch(toInsert->second);
     }
-    time(&_list_end_time);
+    _list_time = clock() - _list_time;
 }
 
 void PmergeMe::InsertionSortVec() {
@@ -267,7 +262,7 @@ void PmergeMe::InsertionSortVec() {
         if (toInsert->second >= 0)
             PmergeMe::BinarySearchVec(toInsert->second);
     }
-    time(&_vector_end_time);
+    _vector_time = clock() - _vector_time;
 }
 
 void    PmergeMe::PutResults() {
@@ -275,18 +270,20 @@ void    PmergeMe::PutResults() {
 	for (std::list<int>::iterator it = _list_to_sort.begin(); it !=_list_to_sort.end(); it++)
         std::cout << *it << " ";
 
-    std::cout << std::endl << "After list: " << std::endl;
+    std::cout << std::endl << "After: " << std::endl;
 	for (std::list<int>::iterator it = _sorted_list.begin(); it !=_sorted_list.end(); it++)
-        std::cout << *it << " ";
-
-    std::cout << std::endl << "After vector: " << std::endl;
-	for (std::vector<int>::iterator it = _sorted_vector.begin(); it !=_sorted_vector.end(); it++)
         std::cout << *it << " ";
 
     std::cout   << std::endl << std::endl
                 << "Time to process a range of " << _list_to_sort.size() << " elements with std::list : "
-                << (unsigned long) difftime(_list_end_time, _list_start_time) << " seconds" << std::endl;
+                << (float)_list_time/CLOCKS_PER_SEC << " seconds" << std::endl;
 
     std::cout   << "Time to process a range of " << _sorted_list.size() << " elements with std::vector : "
-                << (unsigned long) difftime(_vector_end_time, _vector_start_time) << " seconds" << std::endl;
+                << (float)_vector_time/CLOCKS_PER_SEC << " seconds" << std::endl;
 }
+
+
+// std::cout << std::endl << "*********** LIST PAIRS AFTER MERGE SORT ***********" << std::endl;
+// for (std::list<std::pair<int, int> >::iterator it = _list.begin(); it !=_list.end(); it++)
+//     std::cout << "first =" <<(*it).first << ", second =" <<(*it).second <<  std::endl;
+// std::cout << std::endl << "_list.size()=" << _list.size() << std::endl;

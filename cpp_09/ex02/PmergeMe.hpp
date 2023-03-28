@@ -10,6 +10,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <unistd.h>
+#include <ctime>
 
 class PmergeMe {
     public:
@@ -40,18 +41,13 @@ class PmergeMe {
         void    PutResults(void);
 
     private:
-        std::list<int>                      _list_to_sort;
-        std::list<int>                      _sorted_list;
+        std::list<int>                      _list_to_sort, _sorted_list;
         std::list<std::pair<int, int> >     _list;
-        time_t                              _list_start_time;
-        time_t                              _list_end_time;
+        clock_t                             _list_time;
 
-        std::vector<int>                    _to_sort_vector;
-        std::vector<int>                    _sorted_vector;
+        std::vector<int>                    _to_sort_vector, _sorted_vector;
         std::vector<std::pair<int, int> >   _vector;
-        time_t                              _vector_start_time;
-        time_t                              _vector_end_time;
-
+        clock_t                             _vector_time;
 };
 
 #endif
