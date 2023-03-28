@@ -1,4 +1,4 @@
-#include "BitcoinExchange.hpp" 
+#include "BitcoinExchange.hpp"
 
 BitcoinExchange::BitcoinExchange(void): _db() {}
 BitcoinExchange::~BitcoinExchange(void) {}
@@ -39,32 +39,27 @@ void dateMinusOneDay(struct tm* date)
     const time_t ONE_DAY = 24 * 60 * 60 ;
 
     // Seconds since start of epoch
-    time_t date_seconds = mktime( date ) - ONE_DAY ;
+    time_t date_seconds = mktime( date ) - ONE_DAY;
 
     // Update caller's date
     // Use localtime because mktime converts to UTC so may change date
-    *date = *localtime( &date_seconds ) ; ;
+    *date = *localtime(&date_seconds);
 }
 
-double BitcoinExchange::calcExchangeRate(struct tm date, double btc) {
+float BitcoinExchange::calcExchangeRate(struct tm date, double btc) {
     std::map<std::string, float>::iterator it;
     char buffer[12];
-    
+
     memset(buffer, 0, sizeof(buffer));
     strftime(buffer, 12, "%Y-%m-%d", &date);
-    std::cout << "calculated date:" << buffer << std::endl;
-
     it = _db.find(buffer);
     while (it == _db.end()) {
         memset(buffer, 0, sizeof(buffer));
         dateMinusOneDay(&date);
         strftime(buffer, 12, "%Y-%m-%d", &date);
-        std::cout << "calculated date:" << buffer << std::endl;
-
         it = _db.find(buffer);
         if (it == _db.begin())
             return (0);
     }
-
-    return (btc * (it->second));
+    return ((float)btc * (float)(it->second));
 }

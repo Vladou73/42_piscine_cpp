@@ -21,6 +21,22 @@ bool	str_has_right_format_number(const std::string &str) {
 	return (true);
 }
 
+bool	check_days_months(int month, int day) {
+	if (month < 1 || month > 12)
+		return true;
+	if (month == 4 || month == 6 || month == 9 || month == 11)
+		return (day > 30);
+	else
+		return (day > 31);
+}
+
+bool	check_february(int year, int day) {
+	if (year % 4 == 0)
+		return (day > 29);
+	else
+		return (day > 28);
+}
+
 bool	date_is_ok(const std::string &str, struct tm *date) {
 	size_t	pos1 = 0;
 	size_t	pos2 = 0;
@@ -29,30 +45,30 @@ bool	date_is_ok(const std::string &str, struct tm *date) {
 	int		day = 0;
 
 	pos1 = str.find("-");
-	if (pos1 == std::string::npos) 
+	if (pos1 == std::string::npos)
 		return (false);
 	pos2 = str.find("-", pos1 + 1);
-	if (pos2 == std::string::npos) 
+	if (pos2 == std::string::npos)
 		return (false);
-	
+
 	year = atoi(str.substr(0, pos1).c_str());
 	month = atoi(str.substr(pos1 + 1, pos2).c_str());
 	day = atoi(str.substr(pos2 + 1, std::string::npos).c_str());
 
-	if (
-		year < 2009 || year > 2023
-		|| month < 1 || month > 12
-		|| day < 1 || day > 12
-		|| (month == 2 && (day > 28))
-	)
-		return (false);
+	if (year < 2009 || year > 2023 || (year == 2009 && month == 1 && day == 1))
+		return false;
+	if (month == 2 && check_february(year, day))
+		return false;
+	if (check_days_months(month, day))
+		return false;
 
 	date->tm_year = year - 1900;
     date->tm_mon = month - 1;
     date->tm_mday = day;
 	date->tm_sec = 0;
 	date->tm_min = 0;
-	date->tm_hour = 12; 
+	date->tm_hour = 12;
+
 	return (true);
 }
 
@@ -77,7 +93,7 @@ int main(int argc, char **argv) {
     }
 
 	size_t		pos;
-	int			exchangeRate = 0;
+	float		exchangeRate = 0;
 	std::string	bitcoins;
 	std::string	str_date;
 	struct tm 	date;
@@ -90,21 +106,22 @@ int main(int argc, char **argv) {
 		memset(&date, 0, sizeof(tm));
 		pos = line.find(" | ");
 		if (pos == std::string::npos) {
-			std::cout << "Error: bad input format missing '|' => " << line << std::endl;
+			std::cout << "Error: bad input format missing \" | \" => " << line << std::endl;
 			continue;
 		}
 		bitcoins = line.substr(pos + 3, std::string::npos);
 		str_date = line.substr(0, pos);
+
 		if (!str_has_right_format_number(bitcoins)) {
-			std::cout << "Error: wrong number format => " << line << std::endl;
+			std::cout << "Error: wrong number format => " << bitcoins << std::endl;
 			continue;
 		}
 		if (atof(bitcoins.c_str()) < 0 || atof(bitcoins.c_str()) > 1000) {
-			std::cout << "Error: number out of range => " << line << std::endl;
+			std::cout << "Error: number out of range => " << bitcoins << std::endl;
 			continue;
 		}
 		if (!date_is_ok(str_date, &date)) {
-			std::cout << "Error: date format => " << line << std::endl;
+			std::cout << "Error: date format or range => " << str_date << std::endl;
 			continue;
 		}
 		exchangeRate = BE.calcExchangeRate(date, atof(bitcoins.c_str()));
@@ -118,6 +135,6 @@ int main(int argc, char **argv) {
 
     if (in_file.is_open())
 		in_file.close();
-	
+
 	return 0;
 }
